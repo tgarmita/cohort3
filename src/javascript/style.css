@@ -1,0 +1,12 @@
+/* #sizeoutput:hover {  */
+    /* transition: 2s; */
+    /* transform: scale(2); */
+    /* font-size: 3em; */
+    /* color: darkgreen */
+
+/* } */
+ 
+
+#heading:hover {
+    color: blue;
+}
