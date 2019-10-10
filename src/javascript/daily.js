@@ -31,3 +31,11 @@ assertEquals(1,2);
 assertEquals(2,2);
 assertEquals("2",2);
 assertEquals("This value","This value");
+
+
+export const makeEmailArr = (name) => {
+    let firstN = name[0].toLowerCase();
+    let lastN = name[1].toLowerCase();
+    return firstN + "." + lastN + "@evolveu.ca";
+};
+
