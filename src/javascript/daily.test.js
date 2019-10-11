@@ -1,5 +1,7 @@
 import * as functions from './daily'
 
+
+//Oct7
 test('Compare the parameters', () => {
     expect(functions.assertEquals("a","b")).toBe(false);
     expect(functions.assertEquals("a","a")).toBe(true);
@@ -10,7 +12,7 @@ test('Compare the parameters', () => {
 });
 
 /*
-    Write a function to format an email based on an array.
+    Oct9 - Write a function to format an email based on an array.
 */
 
 test('email builder from an array', () => {
@@ -20,5 +22,20 @@ test('email builder from an array', () => {
     expect(functions.makeEmailArr(["First", "Last"]))
         .toEqual("first.last@evolveu.ca");
     expect(functions.makeEmailArr(["Bill", "Smith"]))
+        .toEqual("bill.smith@evolveu.ca");
+});
+
+
+/*	
+	Oct11 - Write the function to format an email based on an object / map
+*/
+
+test('email builder from an object / map', () => {
+    const name = { fname: 'first', lname: 'last' };
+    expect(functions.makeEmailObj(name))
+        .toEqual("first.last@evolveu.ca");
+    expect(functions.makeEmailObj({ fname: 'First', lname: 'Last' }))
+        .toEqual("first.last@evolveu.ca");
+    expect(functions.makeEmailObj({ fname: "Bill", lname: "Smith" }))
         .toEqual("bill.smith@evolveu.ca");
 });
