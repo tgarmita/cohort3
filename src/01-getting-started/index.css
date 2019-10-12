@@ -65,6 +65,34 @@ html {
     width: 50px;
 }
 
+#idNum1, #idNum2 {
+    border: 1;
+    width: 50px;
+    background-color: rgb(174, 247, 165);
+    margin: 5px;
+}
+
+#idOperator {
+    border: 2px solid gray;
+    border-radius: 4px;
+    margin: 5px;
+}
+
+#idEquals {
+    border: 2px solid gray;
+    border-radius: 4px;
+    margin: 5px;
+}
+
+#idEquals:hover {
+    background-color: rgb(193, 143, 250);
+    color: white;
+  }
+
+  #idAnswer {
+    color: black;
+
+}
 
 /* Turn off parallax scrolling for tablets and phones */
 

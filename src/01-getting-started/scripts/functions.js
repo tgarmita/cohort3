@@ -10,11 +10,20 @@ const functions = {
     },
 
     add: (num1, num2) => {
-        return num1 + num2;
+        return Number(num1) + Number(num2);
     },
 
     subtract: (num1, num2) => {
         return num1 - num2;
+    },
+
+    
+    multiply: (num1, num2) => {
+        return num1 * num2;
+    },
+
+    divide: (num1, num2) => {
+        return num1 / num2;
     }
 
     
