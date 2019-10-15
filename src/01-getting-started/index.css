@@ -132,6 +132,23 @@ html {
 }
 
 
+/* Working with Arrays */
+.myContainer{
+    border: 5px solid black;
+    width: 500px;
+    text-align: left;
+    padding: 10px;
+}
+
+.myContainer *{
+    color: black;
+}
+
+#idAdd, #idShow, #idTotal, #idClear{
+    border-color: rgb(173, 173, 173);
+    border-width: 1px;
+    border-radius: 4px;
+}
 /* Turn off parallax scrolling for tablets and phones */
 
 @media only screen and (max-device-width: 1600px) {

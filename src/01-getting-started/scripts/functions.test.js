@@ -39,3 +39,21 @@ test('Does the tax function work?', () => {
     expect(functions.tax(150000)).toBe(31211.57);
     expect(functions.tax(250000)).toBe(61796.57);
 });
+
+
+test('Does the addElement function work?', () => {
+    expect(functions.addElement([1,2],3)).toStrictEqual([1,2,3]);
+    expect(functions.addElement([],-99)).toStrictEqual([-99]);
+});
+
+test('Does the totalArr function work?', () => {
+    expect(functions.totalArr([1,2,3])).toBe(6);
+    expect(functions.totalArr([0,-99,1.56])).toBe(-97.44);
+    expect(functions.totalArr(["1","2","3"])).toBe(6);
+});
+
+test('Does the clearArr function work?', () => {
+    expect(functions.clearArr([1,2,3])).toStrictEqual([]);
+    expect(functions.clearArr([0,-99,1.56])).toStrictEqual([]);
+    expect(functions.clearArr(["1","2","3"])).toStrictEqual([]);
+});
