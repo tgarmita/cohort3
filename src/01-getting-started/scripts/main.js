@@ -26,3 +26,7 @@ idEquals.addEventListener('click', (() => {
     }
 
 }));
+
+idTaxCalc.addEventListener('click', (() => {
+    idTax.textContent = "$" + functions.tax(idIncome.value);
+}));

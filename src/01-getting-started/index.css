@@ -60,6 +60,9 @@ html {
     cursor: pointer;
 }
 
+
+/* Calculator */
+
 #idNumber {
     border: 0;
     width: 50px;
@@ -84,15 +87,50 @@ html {
     margin: 5px;
 }
 
-#idEquals:hover {
+#idEquals:hover, #idTaxCalc:hover {
     background-color: rgb(193, 143, 250);
     color: white;
   }
 
-  #idAnswer {
+  #idAnswer, #idTax {
     color: black;
-
 }
+
+
+/* Taxes */
+
+/*To remove arrow buttons on number input*/
+#idIncome::-webkit-outer-spin-button,
+#idIncome::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+#idIncome[type=number] {
+    -moz-appearance:textfield; /* For Firefox */
+}
+
+/*Add dollar sign to number field*/
+.input-symbol-dollar {
+    position: relative;
+}
+.input-symbol-dollar input {
+    padding-left:13px;
+    width: 7em;
+}
+.input-symbol-dollar:before {
+    position: absolute;
+    top: -2px;
+    content:"$";
+    left: 5px;
+    color: black;
+}
+
+#idTaxCalc {
+    border-radius: 1px;
+    margin: 10px;
+}
+
 
 /* Turn off parallax scrolling for tablets and phones */
 

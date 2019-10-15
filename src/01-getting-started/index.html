@@ -113,14 +113,14 @@
     </div>
 
 
-    <!------------- Third Parallax Image with Calculator -------------------->
+    <!------------Calculator ---------------->
     <div class="bgimg-2 w3-display-container w3-opacity-min">
         <div class="w3-display-middle">
             <span class="w3-xxlarge w3-text-white w3-wide">MY CALCULATOR</span>
         </div>
     </div>
 
-    <div class="w3-content w3-container w3-padding-64 w3-center" id="idCalc">
+    <div class="w3-content w3-container w3-padding-64 w3-center" id="idCalculator">
         <input id="idNum1" type="number">
         <select id="idOperator" name="cars">
             <option value="add">+</option>
@@ -131,6 +131,20 @@
         <input id="idNum2" type="number">
         <input id="idEquals" type="button" value="=">
         <span id="idAnswer"></span>
+    </div>
+
+<!------------Canadian Taxes ---------------->
+    <div class="bgimg-2 w3-display-container w3-opacity-min">
+        <div class="w3-display-middle">
+            <span class="w3-xxlarge w3-text-white w3-wide">CANADIAN TAXES</span>
+        </div>
+    </div>
+
+    <div class="w3-content w3-container w3-padding-64 w3-center" id="idCalc">
+        <label for="idIncome">Income:</label>
+        <span class="input-symbol-dollar"><input id="idIncome" type="number" min="0" step="0.01" ></span>
+        <input id="idTaxCalc" type="button" value="=>">
+        <span id="idTax"></span>
     </div>
 
 
