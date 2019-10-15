@@ -1,3 +1,5 @@
+import { isTSExpressionWithTypeArguments } from "@babel/types";
+
 /*	Oct7
 	Write the function that will create this output:
 
@@ -45,5 +47,72 @@ export const makeEmailArr = (name) => {
 export const makeEmailObj = (name) => {
     // let firstN = name[0].toLowerCase();
     // let lastN = name[1].toLowerCase();
-    return name.fname.toLowerCase() + "." + name.lname.toLowerCase()+ "@evolveu.ca";
+    return name.fname.toLowerCase() + "." + name.lname.toLowerCase() + "@evolveu.ca";
 };
+
+//Oct15
+// Basics
+// for
+export const forLoop = (a, b, c) => {
+    let args = [a, b, c];
+    let arr = [];
+    let i;
+    for (i = 0; i < args.length; i++) {
+        arr[i] = args[i];
+    }
+    return arr;
+};
+
+// while
+export const whileLoop = (a, b, c) => {
+    let args = [a, b, c];
+    let arr = [];
+    let i = 0;
+    while (i < args.length) {
+        arr[i] = args[i];
+        i++;
+    }
+    return arr;
+};
+
+// do while
+export const doWhileLoop = (a, b, c) => {
+    let args = [a, b, c];
+    let arr = [];
+    let i = 0;
+    do {
+        arr[i] = args[i];
+        i++;
+    } while (i < args.length);
+    return arr;
+};
+
+
+// Next Level
+// for in
+export const forIn = (a, b, c) => {
+    let args = [a, b, c];
+    let arr = [];
+    let i = 0;
+    let x;
+    for (x in args){
+        arr[i] = args[x];
+        i++;
+    };
+    return arr;
+};
+
+// for of
+export const forOf = (a, b, c) => {
+    let args = [a, b, c];
+    let arr = [];
+    let i = 0;
+    let x;
+    for (x of args){
+        arr[i] = x;
+        i++;
+    };
+    return arr;
+};
+
+
