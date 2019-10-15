@@ -55,7 +55,28 @@ const functions = {
     clearArr: (arr) => {
         arr.length = 0;
         return arr;
+    },
+
+
+    lookUp: (pCode) => {
+        const dict = {
+            ab: "Alberta",
+            bc: "British Columbia",
+            mb: "Manitoba",
+            nb: "New Brunswick",
+            nl: "Newfoundland and Labrador",
+            ns: "Nova Scotia",
+            nt: "Northwest Territories",
+            nu: "Nunavut",
+            on: "Ontario",
+            pe: "Prince Edward Island",
+            qc: "Quebec",
+            sk: "Saskatchewan",
+            yt: "Yukon",
+        }
+        return dict[pCode];
     }
+
 };
 
 export default functions;

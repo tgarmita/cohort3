@@ -132,23 +132,26 @@ html {
 }
 
 
-/* Working with Arrays */
+/* Working with Arrays and Dictionaries*/
 .myContainer{
     border: 5px solid black;
     width: 500px;
     text-align: left;
     padding: 10px;
+    margin: auto;
 }
 
 .myContainer *{
     color: black;
 }
 
-#idAdd, #idShow, #idTotal, #idClear{
+#idAdd, #idShow, #idTotal, #idClear, #idLookup{
     border-color: rgb(173, 173, 173);
     border-width: 1px;
     border-radius: 4px;
 }
+
+
 /* Turn off parallax scrolling for tablets and phones */
 
 @media only screen and (max-device-width: 1600px) {
