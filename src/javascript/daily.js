@@ -1,8 +1,8 @@
 
-//Oct16
+//Oct16-17
 //slice
 export const arrSlice = (arr, start, end) => {
-    return arr.slice(start,end);
+    return arr.slice(start, end);
 };
 //splice
 export const arrSplice = (arr, startIndex, howMany, item1) => {
@@ -11,9 +11,51 @@ export const arrSplice = (arr, startIndex, howMany, item1) => {
 };
 
 //forEach
-export const arrforEach = (arr) => {
-    return [];
+export const arrForEach = (arr) => {
+    const timesTwo = (item, index, arr) => {
+        arr[index] = item * 2;
+    };
+    arr.forEach(timesTwo);
+    return arr;
 };
+
+//map
+export const arrMap = (arr) => {
+    const timesTwo = (num) => {
+        return num * 2;
+    };
+    let newArr = arr.map(timesTwo);
+    return newArr;
+}
+
+//reduce
+export const arrReduce = (arr) => {
+    const calcTotal = (accumulator, element) => {
+        return accumulator + element;
+    };
+    return arr.reduce(calcTotal);
+}
+
+//filter
+export const arrFilter = (arr) => {
+    const checkEven = (element) => {
+        return element % 2 === 0;
+    };
+    let newArr = arr.filter(checkEven)
+    return newArr;
+};
+
+//sort
+export const arrSortNum = (arr) => {
+    arr.sort(function (a, b) { return a - b });
+    return arr;
+};
+export const arrSortAlpha= (arr) => {
+    arr.sort();
+    return arr;
+};
+
+
 
 
 

@@ -1,6 +1,6 @@
 import * as functions from './daily'
 
-//Oct16 - More for Array Work
+//Oct16-17 - More Array Work
 test('array slice', () => {
     expect(functions.arrSlice([1,2,3,4], 1,3)).toEqual([2,3]);
     expect(functions.arrSlice(["a","b","c","d"], 1,3)).toEqual(["b","c"]);
@@ -10,6 +10,31 @@ test('array splice', () => {
     expect(functions.arrSplice([1,2,3,4], 1,2,10)).toEqual([1,10,4]);
     expect(functions.arrSplice(["a","b","c","d"], 1,2, "k")).toEqual(["a","k","d"]);
 });
+
+test('array forEach()', () => {
+    expect(functions.arrForEach([1,2,3,4])).toEqual([2,4,6,8]);
+});
+
+test('array map', () => {
+    expect(functions.arrMap([1,2,3,4])).toEqual([2,4,6,8]);
+});
+
+test('array reduce', () => {
+    expect(functions.arrReduce([1,2,3,4])).toEqual(10);
+});
+
+test('array filter', () => {
+    expect(functions.arrFilter([1,2,3,4])).toEqual([2,4]);
+});
+
+test('array sort numerically', () => {
+    expect(functions.arrSortNum([3,100,25,7])).toEqual([3,7,25,100]);
+});
+
+test('array sort alphabetically', () => {
+    expect(functions.arrSortAlpha(["b", "d", "c", "a"])).toEqual(["a","b","c","d"]);
+});
+
 
 //Oct15 - Prepare for Array Work
 
