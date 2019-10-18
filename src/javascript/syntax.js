@@ -33,10 +33,10 @@ const evenOdd = (x) => {
 // functions
 // parameters
 const funcPs = (p1, p2, p3) => p3 + (Number(p1) + Number(p2));
+
 // returns
 const funcReturn = (x) => {
-    return x; //exits function after first return
-    return x + 1;
+    return x; 
 };
 
 
