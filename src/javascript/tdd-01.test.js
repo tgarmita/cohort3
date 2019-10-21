@@ -9,11 +9,11 @@ test('hello world console.log2', () => {
 });
 
 test('check a string to see if it is the same', () => {
-    expect('abcd').toEqual('abcde');
+    expect('abcd').toEqual('abcd');
 });
 
 test('check an array see if it is the same', () => {
-    expect([1, 2, 3, 4]).toEqual([1, 2, 3, 4, 5]);
+    expect([1, 2, 3, 4]).toEqual([1, 2, 3, 4]);
 });
 
 test('emailbuilder produces correct format', () => {
