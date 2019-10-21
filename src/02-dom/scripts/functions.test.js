@@ -17,15 +17,66 @@ describe('button', function () {
         jest.resetModules();
     });
 
-    test('button exists', function () {
-        expect(document.getElementById('idAdd')).toBeTruthy();
+
+    test('createListElement() creates a new list item', function () {
+        let jestList = document.getElementById('idList');
+        let listCount = jestList.childElementCount
+        functions.createListElement();
+        expect(jestList.childElementCount).toEqual(listCount + 1);
     });
 
+    test('appendCardElement() creates a new card at the end of the panel', function () {
+        let jestLeftPanel = document.getElementById('idLeftPanel');
+        let childCount = jestLeftPanel.childElementCount;
+        let cardCount = childCount - 1;
+        let lastCard = jestLeftPanel.lastElementChild;
 
-    test('add function creates properly numbered item', function () {
-        let jestList = document.getElementById('idList');
-        functions.createListElement();
-        expect(jestList.lastElementChild.textContent).toBe("Item 4");
+        functions.appendCardElement();
+
+        expect(jestLeftPanel.childElementCount).toEqual(childCount + 1);
+        expect(lastCard.nextElementSibling).toEqual(jestLeftPanel.lastChild);
+        expect(jestLeftPanel.lastElementChild.firstChild.textContent).toEqual("Card " + (Number(cardCount) + 1));
+    });
+
+    test('addCardBefore() creates a new card before the current card', function () {
+        let jestLeftPanel = document.getElementById('idLeftPanel');
+        functions.appendCardElement();
+        functions.appendCardElement();
+        let childCount = jestLeftPanel.childElementCount;
+        let cardCount = childCount - 1;
+        let currentCard = jestLeftPanel.children[2];
+
+        functions.addCardBefore(currentCard);
+
+        expect(jestLeftPanel.childElementCount).toEqual(childCount + 1);
+        expect(currentCard.previousElementSibling.firstChild.textContent).toEqual("Card " + (Number(cardCount) + 1));
+    });
+
+    test('addCardAfter() creates a new card after the current card', function () {
+        let jestLeftPanel = document.getElementById('idLeftPanel');
+        functions.appendCardElement();
+        let childCount = jestLeftPanel.childElementCount;
+        let cardCount = childCount - 1;
+        let currentCard = jestLeftPanel.children[1];
+
+        functions.addCardAfter(currentCard);
+
+        expect(jestLeftPanel.childElementCount).toEqual(childCount + 1);
+        expect(currentCard.nextElementSibling.firstChild.textContent).toEqual("Card " + (Number(cardCount) + 1));
+    });
+
+    test('deleteCard() deletes the current card', function () {
+        let jestLeftPanel = document.getElementById('idLeftPanel');
+        functions.appendCardElement();
+        functions.appendCardElement();
+        let childCount = jestLeftPanel.childElementCount;
+        let cardCount = childCount - 1;
+        let currentCard = jestLeftPanel.children[1];
+
+        functions.deleteCard(currentCard);
+
+        expect(jestLeftPanel.childElementCount).toEqual(childCount - 1);
+        expect(jestLeftPanel.children[1].firstChild.textContent).toEqual("Card 2");
     });
 });
 

@@ -1,7 +1,42 @@
-#idContainer{
+body {
+    background-color: rgb(234, 240, 255);
+}
+
+#idContainer {
     border: 5px solid black;
     width: 225px;
-    /* text-align: center; */
     padding: 20px;
     margin: auto;
-};
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 15px 150px;
+}
+
+.panel {
+    background-color: white;
+    height: 500px;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+    overflow: auto;
+}
+
+/* .right-panel {
+    height: 350px;
+} */
+
+
+.card {
+    background-color: rgb(234, 223, 247);
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.card > * {
+    margin: 15px 3px 5px 3px;
+}

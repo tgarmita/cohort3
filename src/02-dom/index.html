@@ -10,6 +10,8 @@
 </head>
 
 <body>
+
+    <!-- Basic DOM Section -->
     <div id="idContainer">
         <h1>Basic DOM</h1>
         <ol id="idList">This is a list of stuff
@@ -20,7 +22,39 @@
         <input id="idShow" type="button" value="Show">
         <input id="idAdd" type="button" value="Add">
     </div>
-    <script type="module" src="./scripts/index.js"></script>
+
+
+    <!-- Cards Section -->
+    <h1>Working with Cards</h1>
+    <div class="grid-container">
+        <!-- Button Panel -->
+        <div class="panel left-panel" id="idLeftPanel">
+
+            <input id="idAddCard" type="button" value="Add Card">
+            <!-- <div class="card">Card 1<br><br>
+                <input id="idAddBefore" type="button" value="Add Before">
+                <input id="idAddAfter" type="button" value="Add After"><br>
+                <input id="idDelete" type="button" value="Delete">
+            </div> -->
+        </div>
+
+        <!-- Other Panels -->
+        <div class="panel right-panel" id="idRightPanel1">
+            <h1>Right Side</h1>
+        </div>
+        <div class="panel right-panel" id="idRightPanel1">
+
+        </div>
+        <div class="panel right-panel" id="idRightPanel2">
+            <h1>Right Side</h1>
+        </div>
+    </div>
+
+
+
+
+
+    <script type="module" src="./scripts/main.js"></script>
 </body>
 
 </html>
