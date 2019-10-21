@@ -7,7 +7,7 @@ const html = fs.readFileSync(path.resolve(__dirname, '../index.html'), 'utf8');
 jest
     .dontMock('fs');
 
-describe('button', function () {
+// describe('', function () {
     beforeEach(() => {
         document.documentElement.innerHTML = html.toString();
     });
@@ -18,7 +18,7 @@ describe('button', function () {
     });
 
     test('showChildren() returns children of list element', function () {
-        let jestList = document.getElementById('idList');
+        // let jestList = document.getElementById('idList');
         expect(functions.showChildren(idList)).toEqual(["Item 1","Item 2","Item 3"]);
     });
     
@@ -44,7 +44,6 @@ describe('button', function () {
     });
 
     test ('addCardButtons() appends buttons to cards', function () {
-        let jestLeftPanel = document.getElementById('idLeftPanel');
         let newCard = document.createElement("DIV");
         
         functions.addCardButtons(newCard);
@@ -94,6 +93,6 @@ describe('button', function () {
     });
 
 
-});
+// });
 
 //test structure from https://dev.to/snowleo208/things-i-learned-after-writing-tests-for-js-and-html-page-4lja
