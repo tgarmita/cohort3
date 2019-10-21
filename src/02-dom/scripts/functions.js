@@ -1,3 +1,14 @@
+export const showChildren = (listElement) => {
+    let childrenArray = [];
+    let i = 0;
+    let x;
+    for (x of listElement.children) {
+        childrenArray[i] = x.textContent;
+        i++;
+    }
+    return childrenArray;
+};
+
 export const createListElement = () => {
     let li = document.createElement("li");
     li.appendChild(document.createTextNode("Item " + (idList.childElementCount + 1)));

@@ -1,16 +1,9 @@
 import * as functions from './functions.js';
 
 idContainer.addEventListener('click', (event) => {
+    console.log(event);
     if (event.target.id === "idShow") {
-        console.log(event);
-        let childrenArray = [];
-        let i = 0;
-        let x;
-        for (x of idList.children) {
-            childrenArray[i] = x.textContent;
-            i++;
-        }
-        alert(childrenArray);
+        alert(functions.showChildren(idList));
     }
 
     if (event.target.id === "idAdd") {

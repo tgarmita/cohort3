@@ -17,6 +17,11 @@ describe('button', function () {
         jest.resetModules();
     });
 
+    test('showChildren() returns children of list element', function () {
+        let jestList = document.getElementById('idList');
+        expect(functions.showChildren(idList)).toEqual(["Item 1","Item 2","Item 3"]);
+    });
+    
 
     test('createListElement() creates a new list item', function () {
         let jestList = document.getElementById('idList');
@@ -36,6 +41,15 @@ describe('button', function () {
         expect(jestLeftPanel.childElementCount).toEqual(childCount + 1);
         expect(lastCard.nextElementSibling).toEqual(jestLeftPanel.lastChild);
         expect(jestLeftPanel.lastElementChild.firstChild.textContent).toEqual("Card " + (Number(cardCount) + 1));
+    });
+
+    test ('addCardButtons() appends buttons to cards', function () {
+        let jestLeftPanel = document.getElementById('idLeftPanel');
+        let newCard = document.createElement("DIV");
+        
+        functions.addCardButtons(newCard);
+
+        expect(newCard.children[1].firstChild.nodeValue).toEqual("Add Before");
     });
 
     test('addCardBefore() creates a new card before the current card', function () {
@@ -78,6 +92,8 @@ describe('button', function () {
         expect(jestLeftPanel.childElementCount).toEqual(childCount - 1);
         expect(jestLeftPanel.children[1].firstChild.textContent).toEqual("Card 2");
     });
+
+
 });
 
 //test structure from https://dev.to/snowleo208/things-i-learned-after-writing-tests-for-js-and-html-page-4lja
