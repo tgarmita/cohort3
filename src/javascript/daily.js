@@ -1,3 +1,11 @@
+//Oct21
+export const loopStaff = (staffArray) => {
+    const buildEmail = (currentValue) => {
+        return currentValue.fname.toLowerCase() + "." + currentValue.lname.toLowerCase() + "@evolveu.ca";
+    };
+    return staffArray.map(buildEmail);
+}
+
 
 //Oct16-17
 //slice
@@ -50,7 +58,7 @@ export const arrSortNum = (arr) => {
     arr.sort(function (a, b) { return a - b });
     return arr;
 };
-export const arrSortAlpha= (arr) => {
+export const arrSortAlpha = (arr) => {
     arr.sort();
     return arr;
 };
