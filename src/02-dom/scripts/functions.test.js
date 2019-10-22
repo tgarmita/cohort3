@@ -7,9 +7,10 @@ const html = fs.readFileSync(path.resolve(__dirname, '../index.html'), 'utf8');
 jest
     .dontMock('fs');
 
-// describe('', function () {
+
     beforeEach(() => {
-        document.documentElement.innerHTML = html.toString();
+        //import entire html file before each test function
+        document.documentElement.innerHTML = html.toString(); 
     });
 
     afterEach(() => {
@@ -18,14 +19,15 @@ jest
     });
 
     test('showChildren() returns children of list element', function () {
-        // let jestList = document.getElementById('idList');
-        expect(functions.showChildren(idList)).toEqual(["Item 1","Item 2","Item 3"]);
+        let jestList = document.getElementById('idList');
+        expect(functions.showChildren(jestList)).toEqual(["Item 1","Item 2","Item 3"]);
     });
     
 
     test('createListElement() creates a new list item', function () {
         let jestList = document.getElementById('idList');
         let listCount = jestList.childElementCount
+
         functions.createListElement();
         expect(jestList.childElementCount).toEqual(listCount + 1);
     });
@@ -92,7 +94,5 @@ jest
         expect(jestLeftPanel.children[1].firstChild.textContent).toEqual("Card 2");
     });
 
-
-// });
 
 //test structure from https://dev.to/snowleo208/things-i-learned-after-writing-tests-for-js-and-html-page-4lja
