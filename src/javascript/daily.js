@@ -1,4 +1,26 @@
-//Oct21
+//Oct24
+export const loopStaffIn = (staffArray) => {
+    const emailArr = [];
+    let emailIndex = 0;
+    for (const staffIndex in staffArray) {
+        emailArr[emailIndex] = staffArray[staffIndex].fname.toLowerCase() + "." + staffArray[staffIndex].lname.toLowerCase() + "@evolveu.ca";
+        emailIndex++;
+    }
+    return emailArr;
+};
+
+//this is more appropriate since looping through array
+export const loopStaffOf = (staffArray) => {
+    const emailArr = [];
+    let emailIndex = 0;
+    for (const staffMem of staffArray) {
+        emailArr[emailIndex] = staffMem.fname.toLowerCase() + "." + staffMem.lname.toLowerCase() + "@evolveu.ca";
+        emailIndex++;
+    }
+    return emailArr;
+};
+
+//Oct22
 export const loopStaff = (staffArray) => {
     const buildEmail = (currentValue) => {
         return currentValue.fname.toLowerCase() + "." + currentValue.lname.toLowerCase() + "@evolveu.ca";
