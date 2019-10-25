@@ -1,5 +1,23 @@
 import * as functions from './daily'
 
+//Oct25
+test('email builder using forEach', () => {
+    const staffEmail = functions.loopStaffForEach(data.staff);
+    expect(staffEmail[1]).toEqual("liam.henry@evolveu.ca");
+    expect(staffEmail[2]).toEqual("emma.jones@evolveu.ca");
+    expect(staffEmail[5]).toEqual("william.lee@evolveu.ca");
+});
+
+
+test('email builder using map', () => {
+    const staffEmail = functions.loopStaffMap(data.staff);
+    expect(staffEmail[1]).toEqual("liam.henry@evolveu.ca");
+    expect(staffEmail[2]).toEqual("emma.jones@evolveu.ca");
+    expect(staffEmail[5]).toEqual("william.lee@evolveu.ca");
+});
+
+
+
 //Oct24
 test('email builder using for/in', () => {
     const staffEmail = functions.loopStaffIn(data.staff);

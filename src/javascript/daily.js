@@ -1,9 +1,24 @@
+//Oct25
+export const loopStaffForEach = (staffArray) => {
+    const emailArr = [];
+    staffArray.forEach( (staffMem, index) => {
+        //Using index of staffArray a bit of a shortcut, only works because we can have the same index order
+        emailArr[index] = makeEmailObj(staffMem);
+    })
+    return emailArr;
+};
+
+//So slick
+export const loopStaffMap = (staffArray) => {
+    return staffArray.map(staffMem => makeEmailObj(staffMem));
+};
+
 //Oct24
 export const loopStaffIn = (staffArray) => {
     const emailArr = [];
     let emailIndex = 0;
     for (const staffIndex in staffArray) {
-        emailArr[emailIndex] = staffArray[staffIndex].fname.toLowerCase() + "." + staffArray[staffIndex].lname.toLowerCase() + "@evolveu.ca";
+        emailArr[emailIndex] = makeEmailObj(staffArray[staffIndex]);
         emailIndex++;
     }
     return emailArr;
@@ -14,7 +29,7 @@ export const loopStaffOf = (staffArray) => {
     const emailArr = [];
     let emailIndex = 0;
     for (const staffMem of staffArray) {
-        emailArr[emailIndex] = staffMem.fname.toLowerCase() + "." + staffMem.lname.toLowerCase() + "@evolveu.ca";
+        emailArr[emailIndex] = makeEmailObj(staffMem);
         emailIndex++;
     }
     return emailArr;
@@ -23,7 +38,7 @@ export const loopStaffOf = (staffArray) => {
 //Oct22
 export const loopStaff = (staffArray) => {
     const buildEmail = (currentValue) => {
-        return currentValue.fname.toLowerCase() + "." + currentValue.lname.toLowerCase() + "@evolveu.ca";
+        return makeEmailObj(currentValue);
     };
     return staffArray.map(buildEmail);
 }
