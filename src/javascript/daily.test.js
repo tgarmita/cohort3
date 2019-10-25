@@ -1,6 +1,38 @@
 import * as functions from './daily'
 
-//Oct25
+//Oct25 - To solve repeating tests
+describe('Test functions related to sample data', () => {
+    const data = {
+        staff: [
+            { fname: "Jane", lname: "Smith", balance: 10 },
+            { fname: "Liam", lname: "Henry", balance: 1000 },
+            { fname: "Emma", lname: "Jones", balance: 1330 },
+            { fname: "Olivia", lname: "Notly", balance: 310 },
+            { fname: "Noah", lname: "Ho", balance: 503 },
+            { fname: "William", lname: "Lee", balance: 520 },
+            { fname: "Benjamin", lname: "Amis", balance: 150 },
+        ],
+        company: "EvolveU",
+        city: "Calgary",
+        prov: "Alberta"
+    };
+
+    const arrFunctions = [functions.loopStaffForEach(data.staff), functions.loopStaffMap(data.staff),
+    functions.loopStaffIn(data.staff), functions.loopStaffOf(data.staff), functions.loopStaff(data.staff)];
+
+
+    arrFunctions.forEach((functionCall, index) => {
+        test(`run email builder tests for each function in arrFunctions: ${index}`, () => {
+            console.log(arrFunctions[0].name);
+            const staffEmail = functionCall;
+            expect(staffEmail[1]).toEqual("liam.henry@evolveu.ca");
+            expect(staffEmail[2]).toEqual("emma.jones@evolveu.ca");
+            expect(staffEmail[5]).toEqual("william.lee@evolveu.ca");
+        });
+    });
+});
+
+//Oct 25 - Old way
 test('email builder using forEach', () => {
     const staffEmail = functions.loopStaffForEach(data.staff);
     expect(staffEmail[1]).toEqual("liam.henry@evolveu.ca");
