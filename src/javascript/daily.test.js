@@ -23,7 +23,6 @@ describe('Test functions related to sample data', () => {
 
     arrFunctions.forEach((functionCall, index) => {
         test(`run email builder tests for each function in arrFunctions: ${index}`, () => {
-            console.log(arrFunctions[0].name);
             const staffEmail = functionCall;
             expect(staffEmail[1]).toEqual("liam.henry@evolveu.ca");
             expect(staffEmail[2]).toEqual("emma.jones@evolveu.ca");
