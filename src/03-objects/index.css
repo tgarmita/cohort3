@@ -1,0 +1,80 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+.title-section {
+    text-align: center;
+    padding: 20px;
+}
+
+
+#idGridContainer {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    /* grid-template-rows: 1fr 1fr;
+    grid-gap: 15px 150px; */
+}
+
+#idSummaryPanel {
+    background-color: #7D99FE;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 8fr;
+    gap: 15px 150px;
+    text-align: center;
+    padding: 10px;
+}
+
+.subheading{
+    grid-column-start: span 2;
+}
+
+
+#idCardPanel {
+    background-color: #DDE4FF;
+    height: 800px;
+    text-align: center;
+    /* border-radius: 10px; */
+    padding: 10px;
+    /* overflow: auto; */
+}
+
+.card {
+    background-color: #FFE09B;
+    margin: 30px;
+    padding: 20px;
+    border-radius: 5px;
+}
+.card > * {
+    margin: 15px 3px 5px 3px;
+}
+
+
+
+/* --- To remove arrow buttons on number input--- */
+#idAmountInput::-webkit-outer-spin-button,
+#idAmountInput::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+#idAmountInput[type=number] {
+    -moz-appearance:textfield; /* For Firefox */
+}
+
+/* --- Add dollar sign to number field --- */
+.input-symbol-dollar {
+    position: relative;
+}
+.input-symbol-dollar input {
+    padding-left:13px;
+    width: 7em;
+}
+.input-symbol-dollar:before {
+    position: absolute;
+    top: 1px;
+    content:"$";
+    left: 5px;
+    color: black;
+}

@@ -19,8 +19,3 @@ export class Account {
 
 }
 
-
-// constructor - 2 parms - account name, initial balance
-// deposit - 1 parm - value to be added
-// withdraw -1 parm - value to be withdrawn 
-// balance - no parms - returns current balance 

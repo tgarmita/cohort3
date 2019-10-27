@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="./index.css">
+    <title>Account Exercise</title>
+</head>
+
+<body>
+    <div class="title-section">
+        <h1>Account Manager</h1>
+    </div>
+
+    <div id="idGridContainer">
+
+        <!-- Left - Account Summary Panel -->
+        <div id="idSummaryPanel">
+            <h2 class="subheading">Account Summary</h2>
+            <h3>Name</h3>
+            <h3>Balance</h3>
+        </div>
+
+        <!-- Right - Account Card Panel -->
+        <div id="idCardPanel">
+            <h2>Accounts</h2>
+            <div class="card">Checking Account<br><br>
+                <label>Amount: 
+                    <span class="input-symbol-dollar"><input id="idAmountInput" type="number" min="0" step="0.01"></span>
+                </label>
+                <label>Balance: 
+                        <span id="idBalance"></span><br>
+                </label>
+                <input id="idShowBalance" type="button" value="Balance">  <!--Remove-->
+                <input id="idDeposit" type="button" value="Deposit">
+                <input id="idWithdraw" type="button" value="Withdraw">
+                
+                
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <script type="module" src="./scripts/index.js"></script>
+</body>
+
+</html>
