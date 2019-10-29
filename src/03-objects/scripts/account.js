@@ -19,36 +19,35 @@ export class Account {
 
 
 export class AccountController {
-    //might want to pass "view model" somehow through constructor?
     constructor() {
-        this.accountList = [];
+        this.accountArray = [];
     }
 
     createAccount(name, startingBalance) {
-        this.accountList.push(new Account(name, Number(startingBalance)));
+        this.accountArray.push(new Account(name, Number(startingBalance)));
     }
 
-    getAccountList() {
-        return this.accountList;
+    getAccounts() {
+        return this.accountArray;
     }
 
     getAccount(name) {
-        return this.accountList.filter(account => account.name === name)[0];
+        return this.accountArray.filter(account => account.name === name)[0];
     }
     
     removeAccount(name) {
-        this.accountList = this.accountList.filter(account => account.name !== name);
+        this.accountArray = this.accountArray.filter(account => account.name !== name);
     }
 
     totalAccounts() {
-        return this.accountList.reduce(((accumulator, account) => accumulator + account.currentBalance),0);
+        return this.accountArray.reduce(((accumulator, account) => accumulator + account.currentBalance),0);
     }
 
     mostValuableAccount() {
-        return this.accountList.sort((a,b) => b.currentBalance -  a.currentBalance)[0];
+        return this.accountArray.sort((a,b) => b.currentBalance -  a.currentBalance)[0];
     }
 
     leastValuableAccount() {
-        return this.accountList.sort((a,b) => a.currentBalance -  b.currentBalance)[0];
+        return this.accountArray.sort((a,b) => a.currentBalance -  b.currentBalance)[0];
     }
 }

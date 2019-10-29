@@ -32,23 +32,25 @@ describe('Account Controller Testing', () => {
 
     test('createAccount() adds new account to accountList', () => {
         banker.createAccount("Savings Account", 5);
-        expect(banker.accountList[0].name).toEqual("Savings Account");
+        expect(banker.accountArray[0].name).toEqual("Savings Account");
     });
 
-    test('getAccountList() returns array of all accounts', () => {
+    test('getAccounts() returns array of all accounts', () => {
         banker.createAccount("Checking Account", 75);
-        expect(banker.getAccountList()).toEqual([{ "currentBalance": 5, "name": "Savings Account" }, { "currentBalance": 75, "name": "Checking Account" }]);
+        expect(banker.getAccounts()).toEqual([{ "currentBalance": 5, "name": "Savings Account" }, { "currentBalance": 75, "name": "Checking Account" }]);
     });
 
-    test('getAccount() returns account by name', () => {
+    test('getAccount(name) returns account by name', () => {
         expect(banker.getAccount("Checking Account")).toEqual({ "currentBalance": 75, "name": "Checking Account" });
+        expect(banker.getAccount("Non-existent Account")).toEqual(undefined);
+        expect(banker.getAccount("")).toEqual(undefined);
     });
 
     test('removeAccount() removes account of that name', () => {
-        const accountCount = banker.getAccountList().length
+        const accountCount = banker.getAccounts().length
         banker.removeAccount("Savings Account");
-        expect(banker.getAccountList().length).toEqual(accountCount - 1);
-        expect(banker.getAccountList()).toEqual([{ "currentBalance": 75, "name": "Checking Account" }]);
+        expect(banker.getAccounts().length).toEqual(accountCount - 1);
+        expect(banker.getAccounts()).toEqual([{ "currentBalance": 75, "name": "Checking Account" }]);
     });
 
     test('totalAccounts() returns total balance of all accounts', () => {
