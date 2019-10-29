@@ -40,6 +40,10 @@ describe('Account Controller Testing', () => {
         expect(banker.getAccountList()).toEqual([{ "currentBalance": 5, "name": "Savings Account" }, { "currentBalance": 75, "name": "Checking Account" }]);
     });
 
+    test('getAccount() returns account by name', () => {
+        expect(banker.getAccount("Checking Account")).toEqual({ "currentBalance": 75, "name": "Checking Account" });
+    });
+
     test('removeAccount() removes account of that name', () => {
         const accountCount = banker.getAccountList().length
         banker.removeAccount("Savings Account");

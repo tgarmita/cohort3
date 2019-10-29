@@ -25,13 +25,17 @@ export class AccountController {
     }
 
     createAccount(name, startingBalance) {
-        this.accountList.push(new Account(name, startingBalance));
+        this.accountList.push(new Account(name, Number(startingBalance)));
     }
 
     getAccountList() {
         return this.accountList;
     }
 
+    getAccount(name) {
+        return this.accountList.filter(account => account.name === name)[0];
+    }
+    
     removeAccount(name) {
         this.accountList = this.accountList.filter(account => account.name !== name);
     }

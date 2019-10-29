@@ -11,7 +11,7 @@ body {
 
 #idGridContainer {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 3fr 2fr;
     /* grid-template-rows: 1fr 1fr;
     grid-gap: 15px 150px; */
 }
@@ -19,21 +19,46 @@ body {
 #idSummaryPanel {
     background-color: #7D99FE;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 8fr;
-    gap: 15px 150px;
-    text-align: center;
-    padding: 10px;
+    grid-template-columns: 4fr 2fr;
+    grid-template-rows: 1fr 1fr 4fr;
+    gap: 15px 15px;
+    text-align: left;
+    padding: 10px 50px;
 }
 
-.subheading{
+.hidden {
+    visibility: hidden;
+}
+
+.subheading {
     grid-column-start: span 2;
+}
+
+.subheading2 {
+    text-align: center;
+}
+
+.form > * > *{
+    margin: 0px 10px 0px 0px;
+}
+
+#idAccountList {
+    list-style-type: none;
+   
+}
+
+.list-section {
+grid-row-start: span 2;
+}
+
+#idNewAccountName {
+    width: 100px;
 }
 
 
 #idCardPanel {
     background-color: #DDE4FF;
-    height: 800px;
+    height: 700px;
     text-align: center;
     /* border-radius: 10px; */
     padding: 10px;
@@ -50,17 +75,29 @@ body {
     margin: 15px 3px 5px 3px;
 }
 
-
+.delete-button{
+    display: block;
+    float:right;
+    position:relative;
+    top:-110px;
+    right: -15px;
+    height: 20px;
+    width: 20px;
+    padding: 0;
+    font-weight: bolder;
+    font-size: 1em;
+}
 
 /* --- To remove arrow buttons on number input--- */
-#idAmountInput::-webkit-outer-spin-button,
-#idAmountInput::-webkit-inner-spin-button {
+.amount-input-dollar::-webkit-outer-spin-button,
+.amount-input-dollar::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */
     -webkit-appearance: none;
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
-#idAmountInput[type=number] {
+.amount-input-dollar[type=number] {
     -moz-appearance:textfield; /* For Firefox */
+    width: 5em;
 }
 
 /* --- Add dollar sign to number field --- */

@@ -19,26 +19,55 @@
         <!-- Left - Account Summary Panel -->
         <div id="idSummaryPanel">
             <h2 class="subheading">Account Summary</h2>
-            <h3>Name</h3>
-            <h3>Balance</h3>
+
+            <div class="form">
+                <h3>Create New Account</h3>
+                <label>Account Name:
+                    <input id="idNewAccountName" type="text">
+                </label>
+                <label>Initial Balance:
+                    <span class="input-symbol-dollar"><input class="amount-input-dollar" id="idInitialBalance" type="number" min="0"
+                            step="0.01"></span>
+                </label>
+                <button type='button' id="idAddAccount">Add Account</button>
+            </div>
+
+            <div class="list-section">
+                <h3 class="subheading2">Account List</h3>
+                <ul id="idAccountList">
+                    <!-- <li>Primary Account: $0 </li> -->
+                </ul>
+            </div>
+
+            <div id="idReports" class="hidden">
+                <h3>Reports</h3>
+                <button type='button' id="idTotalAccounts">Total Balance</button>
+                <button type='button' id="idMostValuable">Most Valuable</button>
+                <button type='button' id="idLeastValuable">Most Valuable</button><br><br>
+                <span id="idReportMessage">Report Message</span>
+            </div>
+
+
+
+
         </div>
 
         <!-- Right - Account Card Panel -->
         <div id="idCardPanel">
             <h2>Accounts</h2>
-            <div class="card">Checking Account<br><br>
-                <label>Amount: 
-                    <span class="input-symbol-dollar"><input id="idAmountInput" type="number" min="0" step="0.01"></span>
+
+            <!-- Card Template -->
+            <!-- <div class="card" id="idPrimaryCard">
+                <h3>Primary Account</h3><br>
+                <label>Amount:
+                    <span class="input-symbol-dollar"><input class="amount-input-dollar" type="number" min="0"
+                            step="0.01"></span>
+                    <span>Balance: $</span><span id="idBalance"></span><br>
                 </label>
-                <label>Balance: 
-                        <span id="idBalance"></span><br>
-                </label>
-                <input id="idShowBalance" type="button" value="Balance">  <!--Remove-->
+                <input type="button" value="Balance">
                 <input id="idDeposit" type="button" value="Deposit">
                 <input id="idWithdraw" type="button" value="Withdraw">
-                
-                
-            </div>
+            </div> -->
         </div>
 
 
