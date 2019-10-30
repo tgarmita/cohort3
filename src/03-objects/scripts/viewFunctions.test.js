@@ -26,6 +26,7 @@ describe('DOM Testing', () => {
         viewFunctions.createAccountCard("Checking Account", 5);
         expect(idCardPanel.childElementCount).toEqual(panelChildCount + 1);
         expect(idCardPanel.lastElementChild.id).toEqual("Checking Account");
+        //create test for amountInputId
         expect(idCardPanel.lastElementChild.lastElementChild.textContent).toEqual("×"); //delete button
     });
 
@@ -65,29 +66,6 @@ describe('DOM Testing', () => {
 
         //add tests for other card events
     });
-
-    // test('addToAccountList(accountName, accountBalance) adds account to list node', () => {
-    //     const listChildCount = idAccountList.childElementCount;
-
-    //     viewFunctions.addToAccountList("Checking Account", 55);
-    //     expect(idAccountList.childElementCount).toEqual(listChildCount + 1);
-    //     expect(idAccountList.lastElementChild.id).toEqual("idListItem-Checking Account");
-    //     expect(idAccountList.lastElementChild.textContent).toEqual("Checking Account: $55");
-    // });
-    
-    // test('removeFromAccountList(accountName) removes account from the list node by name', () => {
-    //     viewFunctions.addToAccountList("Savings Account", 100);
-    //     viewFunctions.addToAccountList("Checking Account", 55);
-    //     const listChildCount = idAccountList.childElementCount;
-
-    //     viewFunctions.removeFromAccountList("Savings Account");
-
-    //     expect(idAccountList.childElementCount).toEqual(listChildCount - 1);
-    //     expect(idAccountList.firstElementChild.id).toEqual("idListItem-Checking Account");
-    // });
-
-    
-
 
 
 });

@@ -1,29 +1,18 @@
-// import { AccountController } from './account.js'
 
 const viewFunctions = {
 
     refreshAccountList: (accounts) => {
-        //"Clear" list
+        //Clear list
         while (idAccountList.hasChildNodes()) {
             idAccountList.removeChild(idAccountList.firstChild);
          }
+         //Repopulate list
         accounts.forEach((account) => {
             let newAccount = document.createElement("LI");
             newAccount.textContent = `${account.name}: $${account.currentBalance}`;
             idAccountList.appendChild(newAccount);
         })
     },
-
-    // addToAccountList: (accountName, accountBalance) => {
-    //     let newAccount = document.createElement("LI");
-    //     newAccount.textContent = `${accountName}: $${accountBalance}`;
-    //     newAccount.id = "idListItem-" + accountName;
-    //     idAccountList.appendChild(newAccount);
-    // },
-
-    // removeFromAccountList: (accountName) => {
-    //     document.getElementById("idListItem-" + accountName).remove();
-    // },
 
     createAccountCard: (accountName, accountBalance) => {
         let newCard = document.createElement("DIV");
@@ -34,12 +23,12 @@ const viewFunctions = {
         accountHeader.textContent = accountName;
         newCard.appendChild(accountHeader);
 
-        viewFunctions.addCardButtons(newCard, accountBalance);
+        viewFunctions.addCardButtons(newCard, accountBalance, accountName);
 
         idCardPanel.appendChild(newCard);
     },
 
-    addCardButtons: (newCard, accountBalance) => {
+    addCardButtons: (newCard, accountBalance, accountName) => {
 
         newCard.appendChild(document.createElement("BR"));
 
@@ -55,6 +44,7 @@ const viewFunctions = {
         amountInput.type = "number";
         amountInput.min = 0;
         amountInput.className = "amount-input-dollar";
+        amountInput.id ="idAmountInput-" + accountName;
         dollarSymbol.appendChild(amountInput);
 
         let balanceLabel = document.createElement("SPAN");
@@ -63,13 +53,14 @@ const viewFunctions = {
 
         let balanceAmount = document.createElement("SPAN");
         balanceAmount.textContent = accountBalance;
+        balanceAmount.id ="idBalanceAmount-" + accountName;
         amountLabel.appendChild(balanceAmount);
 
         newCard.appendChild(document.createElement("BR"));
 
-        let balanceButton = document.createElement("BUTTON");
-        balanceButton.textContent = "Show Balance";
-        newCard.appendChild(balanceButton);
+        // let balanceButton = document.createElement("BUTTON");
+        // balanceButton.textContent = "Show Balance";
+        // newCard.appendChild(balanceButton);
 
         let depositButton = document.createElement("BUTTON");
         depositButton.textContent = "Deposit";

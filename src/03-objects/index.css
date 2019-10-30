@@ -55,6 +55,10 @@ grid-row-start: span 2;
     width: 100px;
 }
 
+#idAccountMessage {
+    color: rgb(214, 6, 6);
+}
+
 
 #idCardPanel {
     background-color: #DDE4FF;
