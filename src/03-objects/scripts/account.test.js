@@ -60,10 +60,10 @@ describe('Account Controller Testing', () => {
     });
 
     test('mostValuableAccount() returns account with highest balance', () => {
-        expect(banker.mostValuableAccount()).toEqual({"currentBalance": 500, "name": "Joint Account"});
+        expect(banker.mostValuableAccount()).toEqual({ "currentBalance": 500, "name": "Joint Account" });
     });
 
     test('leastValuableAccount() returns account with highest balance', () => {
-        expect(banker.leastValuableAccount()).toEqual({"currentBalance": 25, "name": "Holiday Account"});
+        expect(banker.leastValuableAccount()).toEqual({ "currentBalance": 25, "name": "Holiday Account" });
     });
 });

@@ -1,5 +1,5 @@
 import viewFunctions from './viewFunctions.js'
-import { AccountController } from './account.js'
+import {AccountController} from './account.js'
 
 describe('DOM Testing', () => {
 
@@ -8,7 +8,6 @@ describe('DOM Testing', () => {
     const html = fs.readFileSync(path.resolve(__dirname, '../index.html'), 'utf8');
 
     jest.dontMock('fs');
-
 
     beforeEach(() => {
         //import entire html file before each test function
@@ -26,7 +25,6 @@ describe('DOM Testing', () => {
         viewFunctions.createAccountCard("Checking Account", 5);
         expect(idCardPanel.childElementCount).toEqual(panelChildCount + 1);
         expect(idCardPanel.lastElementChild.id).toEqual("Checking Account");
-        //create test for amountInputId
         expect(idCardPanel.lastElementChild.lastElementChild.textContent).toEqual("×"); //delete button
     });
 
@@ -41,13 +39,12 @@ describe('DOM Testing', () => {
         expect(idCardPanel.childElementCount).toEqual(panelChildCount - 1);
         expect(idCardPanel.lastElementChild.id).toEqual("Savings Account");
     });
-    
+
     test('refreshAccountList() updates idAccountList during relevant events', () => {
         const banker = new AccountController();
-        
+
         banker.createAccount("Savings Account", 5);
         viewFunctions.refreshAccountList(banker.getAccounts());
-
 
         expect(idAccountList.childElementCount).toEqual(1);
 
@@ -57,15 +54,21 @@ describe('DOM Testing', () => {
         expect(idAccountList.childElementCount).toEqual(2);
         expect(idAccountList.lastElementChild.textContent).toEqual("Checking Account: $55");
 
-        
+
         banker.removeAccount(banker.getAccount("Savings Account").name);
         viewFunctions.refreshAccountList(banker.getAccounts());
-   
+
         expect(idAccountList.childElementCount).toEqual(1);
         expect(idAccountList.firstElementChild.textContent).toEqual("Checking Account: $55");
 
-        //add tests for other card events
+        banker.getAccount("Checking Account").deposit(45);
+        viewFunctions.refreshAccountList(banker.getAccounts());
+
+        expect(idAccountList.firstElementChild.textContent).toEqual("Checking Account: $100");
+
+        banker.getAccount("Checking Account").withdraw(150);
+        viewFunctions.refreshAccountList(banker.getAccounts());
+
+        expect(idAccountList.firstElementChild.textContent).toEqual("Checking Account: $-50"); //OK bank allows overdraft :)
     });
-
-
 });

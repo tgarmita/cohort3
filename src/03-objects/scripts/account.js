@@ -34,20 +34,20 @@ export class AccountController {
     getAccount(name) {
         return this.accountArray.filter(account => account.name === name)[0];
     }
-    
+
     removeAccount(name) {
         this.accountArray = this.accountArray.filter(account => account.name !== name);
     }
 
     totalAccounts() {
-        return this.accountArray.reduce(((accumulator, account) => accumulator + account.currentBalance),0);
+        return this.accountArray.reduce(((accumulator, account) => accumulator + account.currentBalance), 0);
     }
 
     mostValuableAccount() {
-        return this.accountArray.sort((a,b) => b.currentBalance -  a.currentBalance)[0];
+        return this.accountArray.sort((a, b) => b.currentBalance - a.currentBalance)[0];
     }
 
     leastValuableAccount() {
-        return this.accountArray.sort((a,b) => a.currentBalance -  b.currentBalance)[0];
+        return this.accountArray.sort((a, b) => a.currentBalance - b.currentBalance)[0];
     }
 }

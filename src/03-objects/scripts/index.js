@@ -3,9 +3,8 @@ import viewFunctions from './viewFunctions.js'
 
 const accountController = new AccountController();
 
-
 idGridContainer.addEventListener('click', (event) => {
-    console.log(event)
+    // console.log(event)
 
     /*Account Summary*/
 
@@ -15,7 +14,7 @@ idGridContainer.addEventListener('click', (event) => {
         } else {
 
             let accountName = idNewAccountName.value + " Account";
-            let accountBalance = idInitialBalance.value;
+            let accountBalance = Math.round(Number(idInitialBalance.value)*100) / 100; //round inspired by Lawrence
             idNewAccountName.value = "";
             idInitialBalance.value = "";
 
@@ -42,42 +41,38 @@ idGridContainer.addEventListener('click', (event) => {
         let mVName = accountController.mostValuableAccount().name;
         let mVBalance = accountController.mostValuableAccount().currentBalance;
 
-        idReportMessage.textContent = `Your most valuable account is ${mVName} at $${mVBalance}`;
+        idReportMessage.textContent = `Your most valuable account is the ${mVName} at $${mVBalance}`;
     }
 
     if (event.target.id === "idLeastValuable") {
         let lVName = accountController.leastValuableAccount().name;
         let lVBalance = accountController.leastValuableAccount().currentBalance;
 
-        idReportMessage.textContent = `Your least valuable account is ${lVName} at $${lVBalance}`;
+        idReportMessage.textContent = `Your least valuable account is the ${lVName} at $${lVBalance}`;
     }
 
     /*Account Cards*/
 
-    // if (event.target.value === "Balance") {
-    //     idBalance.textContent = checkingAccount.balance();
-    // }
-
     if (event.target.textContent === "Deposit") {
         let accountCard = event.target.parentNode;
-        let accountInputId = document.getElementById("idAmountInput-" + accountCard.id);
-        let balanceAmountDisplay = document.getElementById("idBalanceAmount-" + accountCard.id);
+        let accountInput = document.getElementById("idAmountInput-" + accountCard.id);
+        let balanceDisplay = document.getElementById("idBalanceAmount-" + accountCard.id);
 
-        accountController.getAccount(accountCard.id).deposit(Number(accountInputId.value));
-        balanceAmountDisplay.textContent = accountController.getAccount(accountCard.id).currentBalance;
+        accountController.getAccount(accountCard.id).deposit(Math.round(Number(accountInput.value)*100) / 100);
+        balanceDisplay.textContent = accountController.getAccount(accountCard.id).currentBalance;
         viewFunctions.refreshAccountList(accountController.getAccounts());
-        accountInputId.value = "";
+        accountInput.value = "";
     }
 
     if (event.target.textContent === "Withdraw") {
         let accountCard = event.target.parentNode;
-        let accountInputId = document.getElementById("idAmountInput-" + accountCard.id);
-        let balanceAmountDisplay = document.getElementById("idBalanceAmount-" + accountCard.id);
+        let accountInput = document.getElementById("idAmountInput-" + accountCard.id);
+        let balanceDisplay = document.getElementById("idBalanceAmount-" + accountCard.id);
 
-        accountController.getAccount(accountCard.id).withdraw(Number(accountInputId.value));
-        balanceAmountDisplay.textContent = accountController.getAccount(accountCard.id).currentBalance;
+        accountController.getAccount(accountCard.id).withdraw(Math.round(Number(accountInput.value)*100) / 100);
+        balanceDisplay.textContent = accountController.getAccount(accountCard.id).currentBalance;
         viewFunctions.refreshAccountList(accountController.getAccounts());
-        accountInputId.value = "";
+        accountInput.value = "";
     }
 
     if (event.target.className === "delete-button") {
@@ -89,6 +84,5 @@ idGridContainer.addEventListener('click', (event) => {
             idReports.classList.add("hidden");
         }
     }
-
 });
 

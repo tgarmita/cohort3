@@ -12,8 +12,6 @@ body {
 #idGridContainer {
     display: grid;
     grid-template-columns: 3fr 2fr;
-    /* grid-template-rows: 1fr 1fr;
-    grid-gap: 15px 150px; */
 }
 
 #idSummaryPanel {
@@ -64,9 +62,7 @@ grid-row-start: span 2;
     background-color: #DDE4FF;
     height: 700px;
     text-align: center;
-    /* border-radius: 10px; */
     padding: 10px;
-    /* overflow: auto; */
 }
 
 .card {

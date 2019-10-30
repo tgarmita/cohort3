@@ -5,8 +5,8 @@ const viewFunctions = {
         //Clear list
         while (idAccountList.hasChildNodes()) {
             idAccountList.removeChild(idAccountList.firstChild);
-         }
-         //Repopulate list
+        }
+        //Repopulate list
         accounts.forEach((account) => {
             let newAccount = document.createElement("LI");
             newAccount.textContent = `${account.name}: $${account.currentBalance}`;
@@ -29,7 +29,6 @@ const viewFunctions = {
     },
 
     addCardButtons: (newCard, accountBalance, accountName) => {
-
         newCard.appendChild(document.createElement("BR"));
 
         let amountLabel = document.createElement("LABEL");
@@ -43,8 +42,9 @@ const viewFunctions = {
         let amountInput = document.createElement("INPUT");
         amountInput.type = "number";
         amountInput.min = 0;
+        amountInput.step = 0.01;
         amountInput.className = "amount-input-dollar";
-        amountInput.id ="idAmountInput-" + accountName;
+        amountInput.id = "idAmountInput-" + accountName;
         dollarSymbol.appendChild(amountInput);
 
         let balanceLabel = document.createElement("SPAN");
@@ -53,14 +53,10 @@ const viewFunctions = {
 
         let balanceAmount = document.createElement("SPAN");
         balanceAmount.textContent = accountBalance;
-        balanceAmount.id ="idBalanceAmount-" + accountName;
+        balanceAmount.id = "idBalanceAmount-" + accountName;
         amountLabel.appendChild(balanceAmount);
 
         newCard.appendChild(document.createElement("BR"));
-
-        // let balanceButton = document.createElement("BUTTON");
-        // balanceButton.textContent = "Show Balance";
-        // newCard.appendChild(balanceButton);
 
         let depositButton = document.createElement("BUTTON");
         depositButton.textContent = "Deposit";
