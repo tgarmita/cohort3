@@ -1,3 +1,14 @@
+
+//Oct29 - More Array Exercises
+export const totalBalances = (staffArray) => {
+    return staffArray.reduce(((accumulator, staffMem) => accumulator + staffMem.balance), 0);
+};
+
+export const averageBalances = (staffArray) => {
+    const total = staffArray.reduce(((accumulator, staffMem) => accumulator + staffMem.balance), 0);
+    return total /staffArray.length; 
+};
+
 //Oct25
 export const loopStaffForEach = (staffArray) => {
     const emailArr = [];
