@@ -1,3 +1,6 @@
+
+const fetch =  require('node-fetch');
+
 const functions = {
 
     url: 'https://uinames.com/api/?amount=10',
@@ -40,7 +43,8 @@ const functions = {
     //         const response = await fetch(functions.url);
     //         const data = await response.json();
     //         return data;
-    //     } catch (error) {
+    //     } 
+    //     catch (error) {
     //         console.error('Error:', error);
     //         throw (error);
     //     }
@@ -50,7 +54,9 @@ const functions = {
     //     const data = await functions.getUsers();
     //     console.log(functions.getFirstName(data));
     //     console.log(functions.getAllFirstNames(data));
-    // },
+
+    //     return functions.getAllFirstNames(data).length; //added for testing
+//     },
 };
 
 const me = {"name":"Tyler","surname":"Armitage","gender":"male","region":"Canada"};
