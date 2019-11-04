@@ -75,10 +75,15 @@ export class Community {
     getMostSouthern() {
         return this.cityList.sort((a, b) => a.lat - b.lat)[0];
     }
+
+    getHighestKey() {
+        if (this.cityList.length > 0) return this.cityList.sort((a, b) => b.key - a.key)[0].key;
+        return 0;
+    }
 }
 
 
-const fetch = require('node-fetch');
+// const fetch = require('node-fetch');
 const url = 'http://localhost:5000/';
 
 export async function postData(url, data = {}) {

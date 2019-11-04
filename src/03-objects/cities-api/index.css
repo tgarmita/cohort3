@@ -1,0 +1,77 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+.title-section {
+    text-align: center;
+    padding: 20px;
+}
+
+
+#idGridContainer {
+    display: grid;
+    grid-template-columns: 3fr 3fr;
+}
+
+#idSummaryPanel {
+    background-color: #7D99FE;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    grid-template-rows: 1fr 1fr 4fr;
+    gap: 15px 15px;
+    text-align: left;
+    padding: 10px 50px;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.subheading {
+    grid-column-start: span 2;
+}
+
+.subheading2 {
+    text-align: center;
+}
+
+
+.form > * > *{
+    margin: 5px 10px 0px 0px;
+    width: 100px;
+    justify-content: space-between;
+
+}
+
+/* #idAccountList {
+    list-style-type: none;
+   
+} */
+
+.list-section {
+grid-row-start: span 2;
+}
+
+
+#idCityMessage {
+    color: rgb(214, 6, 6);
+}
+
+
+#idMapPanel {
+    background-color: #DDE4FF;
+    height: 800px;
+    text-align: center;
+    padding: 10px;
+}
+
+.map{
+    border: 5px solid black;
+    width: 400px;
+    height: 650px;
+    margin: auto;
+}
+
+
+

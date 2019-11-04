@@ -73,10 +73,14 @@ describe('Community Controller Testing', () => {
     test('getMostSouthern() returns most southern city', () => {
         expect(province.getMostSouthern().name).toEqual("Spooky");
     });
+
+    test('getHighestKey() returns highest key', () => {
+        expect(province.getHighestKey()).toEqual(9);
+    });
 });
 
 describe('Class methods update data on server using API CRUD functionality', () => {
-
+    global.fetch = require('node-fetch');
     const url = 'http://localhost:5000/';
 
     const serverTestData = [
@@ -99,6 +103,7 @@ describe('Class methods update data on server using API CRUD functionality', () 
         expect(data.status).toEqual(200);
         expect(data.length).toBe(3);
         expect(province.cityList.length).toEqual(0);
+        expect(province.getHighestKey()).toEqual(0);
 
         await province.loadData(); //Load test data into cityList
 

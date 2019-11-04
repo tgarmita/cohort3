@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="./index.css">
+    <title>Alberta Cities</title>
+</head>
+
+<body>
+
+    <div id="idGridContainer">
+
+        <!-- Left Panel -->
+        <div id="idSummaryPanel">
+            <h2 class="subheading">Community Manager</h2>
+
+            <div class="form">
+                <h3>Create New City</h3>
+                <label>City Name:
+                    <input id="idCityName" type="text">
+                </label><br>
+                <label>Latitude:
+                    <input id="idLat" type="number">
+                </label><br>
+                <label>Longitude:
+                    <input id="idLong" type="number">
+                </label><br>
+                <label>Population:
+                    <input id="idPopulation" type="number" min="0">
+                </label><br>
+                <button type='button' id="idAddCity">Add City</button><br><br>
+                <span id="idCityMessage"></span>
+            </div>
+
+            <div class="list-section">
+                <!-- <h3 class="subheading2">City List</h3> -->
+                <ul id="idAccountList">
+
+                </ul>
+            </div>
+
+            <div id="idReports" class="hidden">
+                <h3>Reports</h3>
+                <button type='button' id="idTotalPopulation">Total Population</button>
+                <button type='button' id="idMostNorthern">Most Northern</button>
+                <button type='button' id="idMostSouthern">Most Southern</button><br><br>
+                <span id="idReportMessage"></span>
+            </div>
+        </div>
+
+        <!-- Right - Map Panel -->
+        <div id="idMapPanel">
+            <h2>Alberta Map</h2>
+
+            <div class="map">
+                <svg id="idSVG" width="400" height="650">
+                    <!-- <circle cx="50" cy="50" r="10" stroke="black" stroke-width="1" fill="orange" /> -->
+                </svg>
+            </div>
+            <label>Population Change:
+                <input id="idPopChange" type="number" min="0">
+            </label><br>
+            <button type='button' id="idMovedIn">Moved In</button>
+            <button type='button' id="idMovedOut">Moved Out</button>
+            <button type='button' id="idHowBig">How Big</button>
+            <button type='button' id="idWhichSphere">Which Sphere</button><br>
+            <button type='button' id="idDelete">Delete City</button>
+        </div>
+    </div>
+
+    <script type="module" src="./scripts/index.js"></script>
+</body>
+
+</html>
