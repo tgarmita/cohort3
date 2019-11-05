@@ -11,7 +11,7 @@ body {
 
 #idGridContainer {
     display: grid;
-    grid-template-columns: 3fr 3fr;
+    grid-template-columns: 1fr 1fr;
 }
 
 #idSummaryPanel {
@@ -22,6 +22,7 @@ body {
     gap: 15px 15px;
     text-align: left;
     padding: 10px 50px;
+    height: 750px;
 }
 
 .hidden {
@@ -60,16 +61,18 @@ grid-row-start: span 2;
 
 
 #idMapPanel {
-    background-color: #DDE4FF;
-    height: 800px;
+    /* background-color: #DDE4FF; */
+    height: 750px;
     text-align: center;
     padding: 10px;
 }
 
+
 .map{
-    border: 5px solid black;
-    width: 400px;
-    height: 650px;
+    background-image: url('./images/Alberta.png'); /* created from GOA opendata */
+    opacity: 0.75;
+    width: 330px;
+    height: 550px;
     margin: auto;
 }
 

@@ -1,11 +1,12 @@
 import { City, Community, postData } from './cities.js'
 
-const lethbridge = new City(4, "Lethbridge", 49.5, -110, 101500);
-const airdrie = new City(5, "Airdrie", 51.5, -110.1, 70000);
-const sundre = new City(6, "Sundre", 52.5, -110.2, 3000);
-const caroline = new City(7, "Caroline", 53, -110.3, 500);
-const bearberry = new City(8, "Bearberry", 52.7, -110.4, 75);
+const lethbridge = new City(4, "Lethbridge", 49.7, -112.8, 101500);
+const airdrie = new City(5, "Airdrie", 51.2, -114.0, 70000);
+const sundre = new City(6, "Sundre", 51.8, -114.5, 3000);
+const caroline = new City(7, "Caroline", 52.09, -114.74, 500);
+const bearberry = new City(8, "Bearberry", 51.5, -115.0, 75);
 const spooky = new City(9, "Spooky", -55, -110.5, 0);
+
 
 describe('City Testing', () => {
 
@@ -15,7 +16,7 @@ describe('City Testing', () => {
     });
 
     test('show() returns display string of properties', () => {
-        expect(lethbridge.show()).toEqual("Key: 4, Name: Lethbridge, Lat: 49.5, Long: -110, Population: 101500");
+        expect(lethbridge.show()).toEqual("Key: 4, Name: Lethbridge, Lat: 49.7, Long: -112.8, Population: 101500");
     });
 
     test('movedIn(value) adds value to pop', () => {
@@ -43,11 +44,11 @@ describe('Community Controller Testing', () => {
 
 
     test('getCity(key) returns city by key', () => {
-        expect(province.getCity(4)).toEqual({ "key": 4, "name": "Lethbridge", "lat": 49.5, "long": -110, "pop": 100001 });
+        expect(province.getCity(4)).toEqual({ "key": 4, "name": "Lethbridge", "lat": 49.7, "long": -112.8, "pop": 100001 });
     });
 
     test('createCity() adds new city to cityList', () => {
-        province.createCity(7, "Caroline", 53, -110.3, 500);
+        province.createCity(7, "Caroline", 52.09, -114.74, 500);
         expect(province.cityList.length).toEqual(5);
     });
 
@@ -87,6 +88,8 @@ describe('Class methods update data on server using API CRUD functionality', () 
         { "key": 1, "name": "Calgary", "lat": 51.05, "long": -114.05, "pop": 1200000 },
         { "key": 2, "name": "Edmonton", "lat": 53.55, "long": -113.49, "pop": 1000000 },
         { "key": 3, "name": "Red Deer", "lat": 52.28, "long": -113.81, "pop": 100000 },
+        { "key": 4, "name": "Lethbridge", "lat": 49.7, "long": -112.8, "pop": 93000 },
+        { "key": 5, "name": "Peace River", "lat": 56.23, "long": -117.23, "pop": 7000 }
     ];
 
     const province = new Community([]);
@@ -98,32 +101,35 @@ describe('Class methods update data on server using API CRUD functionality', () 
         data = await postData(url + 'add', serverTestData[0]);
         data = await postData(url + 'add', serverTestData[1]);
         data = await postData(url + 'add', serverTestData[2]);
+        data = await postData(url + 'add', serverTestData[3]);
+        data = await postData(url + 'add', serverTestData[4]);
+
 
         data = await postData(url + 'all');
         expect(data.status).toEqual(200);
-        expect(data.length).toBe(3);
+        expect(data.length).toBe(5);
         expect(province.cityList.length).toEqual(0);
         expect(province.getHighestKey()).toEqual(0);
 
         await province.loadData(); //Load test data into cityList
 
-        expect(province.cityList.length).toEqual(3);
+        expect(province.cityList.length).toEqual(5);
         expect(province.cityList[2]).toEqual(data[2]);
     });
 
     test('createCity() "adds" city to server', async () => {
         let data = await postData(url + 'all');
         expect(data.status).toEqual(200);
-        expect(data.length).toBe(3);
+        expect(data.length).toBe(5);
 
-        await province.createCity(7, "Caroline", 53, -110.3, 500);
+        await province.createCity(7, "Caroline", 52.09, -114.74, 500);
 
         data = await postData(url + 'all');
         expect(data.status).toEqual(200);
-        expect(data.length).toBe(4);
-        expect(data[3].name).toBe("Caroline");
+        expect(data.length).toBe(6);
+        expect(data[5].name).toBe("Caroline");
 
-        expect(province.cityList[3]).toEqual(data[3]);
+        expect(province.cityList[5]).toEqual(data[5]);
     });
 
     test('movedIn/Out() "updates" city pop in server', async () => {
@@ -134,20 +140,20 @@ describe('Class methods update data on server using API CRUD functionality', () 
 
         data = await postData(url + 'all');
         expect(data.status).toEqual(200);
-        expect(data[3].pop).toBe(1000);
+        expect(data[5].pop).toBe(1000);
 
-        expect(province.cityList[3]).toEqual(data[3]);
+        expect(province.cityList[5]).toEqual(data[5]);
     });
 
     test('deleteCity() - deletes city in server by key', async () => {
         let data = await postData(url + 'all');
-        expect(data.length).toBe(4);
+        expect(data.length).toBe(6);
 
         await province.deleteCity(2);
 
         data = await postData(url + 'all');
         expect(data.status).toEqual(200);
-        expect(data.length).toBe(3);
+        expect(data.length).toBe(5);
         expect(data[1].name).toBe("Red Deer");
 
         expect(province.cityList[1]).toEqual(data[1]);
