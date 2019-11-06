@@ -1,5 +1,10 @@
 import * as functions from './daily'
 
+//Nov6 - More Array Exercises (Really)
+test('filterBalances()', () => {
+    expect(functions.filterBalances(data.staff)).toEqual([1000,1330]);
+ });
+
 //Oct29 - More Array Exercises
 test('totalBalances()', () => {
    expect(functions.totalBalances(data.staff)).toEqual(3823);

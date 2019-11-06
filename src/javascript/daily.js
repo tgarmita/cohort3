@@ -1,4 +1,10 @@
 
+//Nov6 - More Array Exercises (Really)
+export const filterBalances = (staffArray) => {
+    const richStaff = staffArray.filter(staffMem => staffMem.balance >= 1000);
+    return richStaff.map(staffMembers => staffMembers.balance);
+};
+
 //Oct29 - More Array Exercises
 export const totalBalances = (staffArray) => {
     return staffArray.reduce(((accumulator, staffMem) => accumulator + staffMem.balance), 0);
@@ -6,13 +12,13 @@ export const totalBalances = (staffArray) => {
 
 export const averageBalances = (staffArray) => {
     const total = staffArray.reduce(((accumulator, staffMem) => accumulator + staffMem.balance), 0);
-    return total /staffArray.length; 
+    return total / staffArray.length;
 };
 
 //Oct25
 export const loopStaffForEach = (staffArray) => {
     const emailArr = [];
-    staffArray.forEach( (staffMem, index) => {
+    staffArray.forEach((staffMem, index) => {
         //Using index of staffArray a bit of a shortcut, only works because we can have the same index order
         emailArr[index] = makeEmailObj(staffMem);
     })
