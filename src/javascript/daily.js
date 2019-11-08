@@ -1,4 +1,20 @@
 
+//Nov8 - Callback Exercise (Part 1)
+export const filterProvinces = (peopleArray, callBackF = array => array) => {
+    const peopleABBC = [];
+    for (const person of peopleArray) {
+        if (person.province === "AB" || person.province === "BC") {
+            peopleABBC.push(callBackF(person));
+        }
+    }
+    return peopleABBC;
+};
+
+export const makeNames = (person) => {
+    return person.fname + " " + person.lname;
+};
+
+
 //Nov6 - More Array Exercises (Really)
 export const filterBalances = (staffArray) => {
     const richStaff = staffArray.filter(staffMem => staffMem.balance >= 1000);
@@ -226,9 +242,9 @@ export const assertEquals = (p1, p2) => {
     if (p1 === p2) {
         return true;
     }
-    console.log(`*** the two values are not the same:
-    p1--> ${p1}
-    p2--> ${p2}`)
+    // console.log(`*** the two values are not the same:
+    // p1--> ${p1}
+    // p2--> ${p2}`)
     return false;
 };
 
