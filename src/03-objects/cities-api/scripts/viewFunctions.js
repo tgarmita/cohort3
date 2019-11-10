@@ -7,7 +7,7 @@ const viewFunctions = {
             idSVG.removeChild(idSVG.firstChild);
         }
         //Repopulate Map
-        cityList.forEach((city) => {
+        cityList.forEach(city => {
             viewFunctions.mapPoints(city);
         })
     },
@@ -23,6 +23,10 @@ const viewFunctions = {
         point.setAttribute("stroke", "black");
         point.setAttribute("stroke-width", "1");
         point.setAttribute("fill", "orange");
+        point.setAttribute("id", city.key);
+        point.setAttribute("class", "city-point");
+
+        
 
         label.setAttribute('x', 165 + (city.long + 115) * 33 + 10);
         label.setAttribute('y', 275 - (city.lat - 54.5) * 50 - 10);
@@ -32,6 +36,14 @@ const viewFunctions = {
 
         idSVG.appendChild(point);
         idSVG.appendChild(label);
+    },
+
+    selectPoint: (selectedPoint) => {
+        idSVG.childNodes.forEach(point => {
+            point.classList.remove("city-selected");
+        });
+
+        selectedPoint.classList.add("city-selected");
     }
 };
 

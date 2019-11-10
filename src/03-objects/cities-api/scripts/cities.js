@@ -12,12 +12,12 @@ export class City {
     }
 
     async movedIn(value) {
-        this.pop += value;
+        this.pop += Number(value);
         await postData(url + 'update', this);
     }
 
     async movedOut(value) {
-        this.pop -= value;
+        this.pop -= Number(value);
         await postData(url + 'update', this);
     }
 

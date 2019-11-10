@@ -2,6 +2,7 @@ import { Community, postData } from './cities.js'
 import viewFunctions from './viewFunctions.js'
 
 const province = new Community([]);
+let selectedCityKey = 0;
 
 //DOMContentLoaded inspired by Mike
 document.addEventListener('DOMContentLoaded', async () => {
@@ -21,7 +22,7 @@ idSummaryPanel.addEventListener('click', (event) => {
             idCityMessage.textContent = "Please enter a city name.";
         } else {
 
-            let key = province.getHighestKey() + 1;
+            let key = province.getHighestKey() + 1; //change to key counter in server? key #0?
             let name = idCityName.value;
             let lat = Number(idLat.value);
             let long = Number(idLong.value);
@@ -64,5 +65,25 @@ idSummaryPanel.addEventListener('click', (event) => {
 
 idMapPanel.addEventListener('click', (event) => {
     console.log(event)
+
+    if (event.target.nodeName === "circle") {
+        viewFunctions.selectPoint(event.target);
+        selectedCityKey = Number(event.target.id);
+        idSelectedCity.textContent = province.getCity(selectedCityKey).name;
+    }
+
+    if (event.target.id === "idMovedIn") {
+        if (idPopChange.value !== "") {
+            province.getCity(selectedCityKey).movedIn(idPopChange.value);
+            idPopChange.value = "";
+        }
+    }
+
+    if (event.target.id === "idMovedOut") {
+        if (idPopChange.value !== "") {
+            province.getCity(selectedCityKey).movedOut(idPopChange.value);
+            idPopChange.value = "";
+        }
+    }
 });
 

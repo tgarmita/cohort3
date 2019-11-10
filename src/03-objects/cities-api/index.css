@@ -11,17 +11,17 @@ body {
 
 #idGridContainer {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(375px, 500px) auto;
 }
 
 #idSummaryPanel {
     background-color: #7D99FE;
     display: grid;
-    grid-template-columns: 4fr 1fr;
+    grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 4fr;
     gap: 15px 15px;
     text-align: left;
-    padding: 10px 50px;
+    padding: 10px 0px 10px 30px;
     height: 750px;
 }
 
@@ -43,15 +43,6 @@ body {
     width: 100px;
     justify-content: space-between;
 
-}
-
-/* #idAccountList {
-    list-style-type: none;
-   
-} */
-
-.list-section {
-grid-row-start: span 2;
 }
 
 
@@ -76,5 +67,19 @@ grid-row-start: span 2;
     margin: auto;
 }
 
+.city-point:hover {
+    cursor: pointer;
+}
 
+.city-selected {
+    stroke: rgb(0, 128, 255);
+    stroke-width: 3;
+}
 
+#idCityTools > * {
+    margin: 2px;
+}
+
+#idPopChange {
+    width: 100px;
+}
