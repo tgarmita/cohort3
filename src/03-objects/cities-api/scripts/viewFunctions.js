@@ -1,4 +1,3 @@
-
 const viewFunctions = {
 
     refreshMap: (cityList) => {
@@ -19,20 +18,16 @@ const viewFunctions = {
 
         point.setAttribute('cx', 165 + (city.long + 115) * 33);
         point.setAttribute('cy', 275 - (city.lat - 54.5) * 50);
-        point.setAttribute("r", "10");
+        point.setAttribute("r", "7");
         point.setAttribute("stroke", "black");
         point.setAttribute("stroke-width", "1");
         point.setAttribute("fill", "orange");
         point.setAttribute("id", city.key);
         point.setAttribute("class", "city-point");
 
-        
-
         label.setAttribute('x', 165 + (city.long + 115) * 33 + 10);
         label.setAttribute('y', 275 - (city.lat - 54.5) * 50 - 10);
-
-        let txt = document.createTextNode(city.name);
-        label.appendChild(txt);
+        label.appendChild(document.createTextNode(city.name));
 
         idSVG.appendChild(point);
         idSVG.appendChild(label);

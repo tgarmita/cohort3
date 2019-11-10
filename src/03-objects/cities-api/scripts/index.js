@@ -1,8 +1,9 @@
-import { Community, postData } from './cities.js'
+import { Community } from './cities.js'
 import viewFunctions from './viewFunctions.js'
 
 const province = new Community([]);
 let selectedCityKey = 0;
+let selectedCity = {};
 
 //DOMContentLoaded inspired by Mike
 document.addEventListener('DOMContentLoaded', async () => {
@@ -15,11 +16,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 idSummaryPanel.addEventListener('click', (event) => {
-    // console.log(event)
 
     if (event.target.id === "idAddCity") {
         if (idCityName.value === "") {
-            idCityMessage.textContent = "Please enter a city name.";
+            idCreateCityMessage.textContent = "Please enter a city name.";
         } else {
 
             let key = province.getHighestKey() + 1; //change to key counter in server? key #0?
@@ -36,13 +36,12 @@ idSummaryPanel.addEventListener('click', (event) => {
             province.createCity(key, name, lat, long, pop);
 
             viewFunctions.refreshMap(province.cityList);
-            idCityMessage.textContent = ""
+            idCreateCityMessage.textContent = ""
             if (province.cityList.length > 0) {
                 idReports.classList.remove("hidden");
             }
         }
     }
-
 
     if (event.target.id === "idTotalPopulation") {
         idReportMessage.textContent = `Total population of Alberta: ${province.getPopulation()}`;
@@ -63,25 +62,52 @@ idSummaryPanel.addEventListener('click', (event) => {
     }
 });
 
+
 idMapPanel.addEventListener('click', (event) => {
-    console.log(event)
 
     if (event.target.nodeName === "circle") {
         viewFunctions.selectPoint(event.target);
         selectedCityKey = Number(event.target.id);
-        idSelectedCity.textContent = province.getCity(selectedCityKey).name;
+        selectedCity = province.getCity(selectedCityKey);
+        idSelectedCity.textContent = selectedCity.name;
+        idCityTools.classList.remove("hidden");
+    }
+
+    if (event.target.id === "idShow") {
+        idCityMessage.textContent = selectedCity.show();
+    }
+
+    if (event.target.id === "idHowBig") {
+        idCityMessage.textContent = selectedCity.howBig();
+    }
+
+    if (event.target.id === "idWhichSphere") {
+        idCityMessage.textContent = province.whichSphere(selectedCity);
+    }
+
+    if (event.target.id === "idDelete") {
+        province.deleteCity(selectedCityKey);
+        selectedCityKey = 0;
+        selectedCity = {};
+        idSelectedCity.textContent = "Select City";
+        idCityMessage.textContent = "";
+        idCityTools.classList.add("hidden");
+
+        viewFunctions.refreshMap(province.cityList);
     }
 
     if (event.target.id === "idMovedIn") {
         if (idPopChange.value !== "") {
-            province.getCity(selectedCityKey).movedIn(idPopChange.value);
+            selectedCity.movedIn(idPopChange.value);
+            idCityMessage.textContent = `${idPopChange.value} moved into ${selectedCity.name}`;
             idPopChange.value = "";
         }
     }
 
     if (event.target.id === "idMovedOut") {
         if (idPopChange.value !== "") {
-            province.getCity(selectedCityKey).movedOut(idPopChange.value);
+            selectedCity.movedOut(idPopChange.value);
+            idCityMessage.textContent = `${idPopChange.value} moved out of ${selectedCity.name}`;
             idPopChange.value = "";
         }
     }

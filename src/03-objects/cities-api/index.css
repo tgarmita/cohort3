@@ -41,18 +41,15 @@ body {
 .form > * > *{
     margin: 5px 10px 0px 0px;
     width: 100px;
-    justify-content: space-between;
-
 }
 
 
-#idCityMessage {
+#idCreateCityMessage {
     color: rgb(214, 6, 6);
 }
 
 
 #idMapPanel {
-    /* background-color: #DDE4FF; */
     height: 750px;
     text-align: center;
     padding: 10px;
@@ -76,10 +73,24 @@ body {
     stroke-width: 3;
 }
 
-#idCityTools > * {
+#idSelectedCity{
+    margin: 0px;
+}
+
+#idCityTools  * {
     margin: 2px;
 }
 
+
 #idPopChange {
     width: 100px;
+}
+
+#idDelete {
+    border-color: red;
+    border-width: medium;
+}
+
+#idCityMessage{
+    color: rgb(0, 128, 255);
 }
