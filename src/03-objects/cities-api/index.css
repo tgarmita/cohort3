@@ -37,24 +37,24 @@ body {
     text-align: center;
 }
 
-
 .form > * > *{
     margin: 5px 10px 0px 0px;
     width: 100px;
 }
 
-
 #idCreateCityMessage {
     color: rgb(214, 6, 6);
 }
 
+#idFetchError{
+    color: rgb(214, 6, 6);
+}
 
 #idMapPanel {
     height: 750px;
     text-align: center;
     padding: 10px;
 }
-
 
 .map{
     background-image: url('./images/Alberta.png'); /* created from GOA opendata */

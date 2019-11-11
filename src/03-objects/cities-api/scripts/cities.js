@@ -11,14 +11,12 @@ export class City {
         return `Key: ${this.key}, Name: ${this.name}, Lat: ${this.lat}, Long: ${this.long}, Population: ${this.pop}`
     }
 
-    async movedIn(value) {
+    movedIn(value) {
         this.pop += Number(value);
-        await postData(url + 'update', this);
     }
 
-    async movedOut(value) {
+    movedOut(value) {
         this.pop -= Number(value);
-        await postData(url + 'update', this);
     }
 
     howBig() {
@@ -41,22 +39,14 @@ export class Community {
         return this.cityList.filter(city => city.key === key)[0];
     }
 
-    async loadData() {
-        let data = await postData(url + 'all');
-        this.cityList = data.map(dataCity => new City(dataCity.key, dataCity.name, dataCity.lat, dataCity.long, dataCity.pop));
-        console.log("Cities loaded:")
-        console.log(this.cityList);
-    }
-
-    async createCity(key, name, lat, long, pop) {
+    createCity(key, name, lat, long, pop) {
         const city = new City(key, name, Number(lat), Number(long), Number(pop));
         this.cityList.push(city);
-        await postData(url + 'add', city);
+        return city;
     }
 
-    async deleteCity(key) {
+    deleteCity(key) {
         this.cityList = this.cityList.filter(city => city.key !== key);
-        await postData(url + 'delete', { key });
     }
 
     whichSphere(city) {
@@ -80,30 +70,4 @@ export class Community {
         if (this.cityList.length > 0) return this.cityList.sort((a, b) => b.key - a.key)[0].key;
         return 0;
     }
-}
-
-
-// const fetch = require('node-fetch');
-const url = 'http://localhost:5000/';
-
-export async function postData(url, data = {}) {
-    // Default options are marked with *
-    const response = await fetch(url, {
-        method: 'POST',     // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors',       // no-cors, *cors, same-origin
-        cache: 'no-cache',  // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'same-origin', // include, *same-origin, omit
-        headers: {
-            'Content-Type': 'application/json'
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        redirect: 'follow',         // manual, *follow, error
-        referrer: 'no-referrer',    // no-referrer, *client
-        body: JSON.stringify(data)  // body data type must match "Content-Type" header
-    });
-
-    const json = await response.json();    // parses JSON response into native JavaScript objects
-    json.status = response.status;
-    json.statusText = response.statusText;
-    return json;
 }

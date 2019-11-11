@@ -1,44 +1,56 @@
 import { Community } from './cities.js'
 import viewFunctions from './viewFunctions.js'
+import serverFunctions from './serverFunctions.js'
 
 const province = new Community([]);
 let selectedCityKey = 0;
 let selectedCity = {};
 
-//DOMContentLoaded inspired by Mike
 document.addEventListener('DOMContentLoaded', async () => {
-    await province.loadData();
-    viewFunctions.refreshMap(province.cityList);
-    if (province.cityList.length > 0) {
-        idReports.classList.remove("hidden");
+    const errorMessage = await serverFunctions.loadData(province);
+    if (errorMessage) {
+        idFetchError.textContent = errorMessage;
+    } else {
+        viewFunctions.refreshMap(province.cityList);
+        if (province.cityList.length > 0) {
+            idReports.classList.remove("hidden");
+        } else {
+            idFetchError.textContent = "Warning: Server database is empty."
+        }
     }
 });
 
 
-idSummaryPanel.addEventListener('click', (event) => {
+idSummaryPanel.addEventListener('click', async (event) => {
 
     if (event.target.id === "idAddCity") {
         if (idCityName.value === "") {
             idCreateCityMessage.textContent = "Please enter a city name.";
         } else {
 
-            let key = province.getHighestKey() + 1; //change to key counter in server? key #0?
-            let name = idCityName.value;
-            let lat = Number(idLat.value);
-            let long = Number(idLong.value);
-            let pop = Number(idPopulation.value);
+            const key = province.getHighestKey() + 1; //change to key counter in server? key #0?
+            const name = idCityName.value;
+            const lat = Number(idLat.value);
+            const long = Number(idLong.value);
+            const pop = Number(idPopulation.value);
 
             idCityName.value = "";
             idLat.value = "";
             idLong.value = "";
             idPopulation.value = "";
 
-            province.createCity(key, name, lat, long, pop);
+            const newCity = province.createCity(key, name, lat, long, pop);
 
-            viewFunctions.refreshMap(province.cityList);
-            idCreateCityMessage.textContent = ""
-            if (province.cityList.length > 0) {
-                idReports.classList.remove("hidden");
+            const errorMessage = await serverFunctions.addData(newCity);
+            if (errorMessage) {
+                idFetchError.textContent = errorMessage;
+                province.deleteCity(key);
+            } else {
+                viewFunctions.refreshMap(province.cityList);
+                idCreateCityMessage.textContent = ""
+                if (province.cityList.length > 0) {
+                    idReports.classList.remove("hidden");
+                }
             }
         }
     }
@@ -63,7 +75,7 @@ idSummaryPanel.addEventListener('click', (event) => {
 });
 
 
-idMapPanel.addEventListener('click', (event) => {
+idMapPanel.addEventListener('click', async (event) => {
 
     if (event.target.nodeName === "circle") {
         viewFunctions.selectPoint(event.target);
@@ -86,29 +98,52 @@ idMapPanel.addEventListener('click', (event) => {
     }
 
     if (event.target.id === "idDelete") {
-        province.deleteCity(selectedCityKey);
-        selectedCityKey = 0;
-        selectedCity = {};
-        idSelectedCity.textContent = "Select City";
-        idCityMessage.textContent = "";
-        idCityTools.classList.add("hidden");
+        const errorMessage = await serverFunctions.deleteData(selectedCityKey);
+        if (errorMessage) {
+            idFetchError.textContent = errorMessage;
+        } else {
+            province.deleteCity(selectedCityKey);
+            selectedCityKey = 0;
+            selectedCity = {};
+            idSelectedCity.textContent = "Select City";
+            idCityMessage.textContent = "";
+            idCityTools.classList.add("hidden");
 
-        viewFunctions.refreshMap(province.cityList);
+            viewFunctions.refreshMap(province.cityList);
+
+            if (province.cityList.length < 1) {
+                idReports.classList.add("hidden");
+            }
+        }
     }
 
     if (event.target.id === "idMovedIn") {
         if (idPopChange.value !== "") {
             selectedCity.movedIn(idPopChange.value);
-            idCityMessage.textContent = `${idPopChange.value} moved into ${selectedCity.name}`;
-            idPopChange.value = "";
+
+            const errorMessage = await serverFunctions.updateData(selectedCity);
+            if (errorMessage) {
+                idFetchError.textContent = errorMessage;
+                selectedCity.movedOut(idPopChange.value);
+            } else {
+                idCityMessage.textContent = `${idPopChange.value} moved into ${selectedCity.name}`;
+                idPopChange.value = "";
+            }
         }
     }
 
     if (event.target.id === "idMovedOut") {
         if (idPopChange.value !== "") {
             selectedCity.movedOut(idPopChange.value);
-            idCityMessage.textContent = `${idPopChange.value} moved out of ${selectedCity.name}`;
-            idPopChange.value = "";
+
+            const errorMessage = await serverFunctions.updateData(selectedCity);
+            if (errorMessage) {
+                idFetchError.textContent = errorMessage;
+                selectedCity.movedIn(idPopChange.value);
+            } else {
+                idCityMessage.textContent = `${idPopChange.value} moved out of ${selectedCity.name}`;
+                idPopChange.value = "";
+            }
         }
     }
 });
