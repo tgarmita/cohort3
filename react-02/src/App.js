@@ -14,7 +14,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      selected: ""
+      selected: tictactoeIcon
     }
 
     this.style = { backgroundColor: '#d4bea7' };
@@ -35,7 +35,7 @@ class App extends Component {
   }
 
   showPage = () => {
-    if (this.state.selected === logo) return <Starter />;
+    if (this.state.selected === logo) return <Starter logo={logo}/>;
     if (this.state.selected === tictactoeIcon) return <Game />;
   }
 
@@ -43,9 +43,10 @@ class App extends Component {
     return (
       <div className="App">
         <nav className="nav">
-          {this.renderIcons}
+          {this.renderIcons()}
         </nav>
-        {this.showPage}
+
+        {this.showPage()}
       </div>
     );
   }
