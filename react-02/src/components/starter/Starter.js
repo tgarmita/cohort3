@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import './Starter.css';
+
 
 
 class Starter extends Component {
