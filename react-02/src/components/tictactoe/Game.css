@@ -41,8 +41,13 @@ body {
   }
   
   .game {
+    padding: 40px;
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    background-color: #282c34;
+    min-height: 100vh;
+    color: white;
   }
   
   .game-info {
