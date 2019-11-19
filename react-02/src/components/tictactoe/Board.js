@@ -4,10 +4,14 @@ import Square from './Square';
 
 class Board extends Component {
 
+  highlightWin(i) {
+    if (this.props.line.includes(i)) return { backgroundColor: '#d4bea7' };
+  }
+
   renderSquare(i) {
-    return <Square value={this.props.squares[i]}
-      onClick={() => this.props.onClick(i)} 
-      />;
+    const style = this.highlightWin(i);
+
+    return <Square value={this.props.squares[i]} style={style} onClick={() => this.props.onClick(i)} />;
   }
 
   render() {
