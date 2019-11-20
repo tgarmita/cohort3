@@ -53,3 +53,9 @@ body {
   .game-info {
     margin-left: 20px;
   }
+
+
+  .form > * {
+    text-align: left;
+    margin: 10px;
+  }

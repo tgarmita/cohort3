@@ -9,8 +9,15 @@ class Game extends Component {
       history: [{ squares: Array(9).fill(null) }],
       stepNumber: 0,
       xIsNext: true,
-      winSquares: []
+      gameStart: false
     }
+    this.startGame= this.startGame.bind(this);
+  }
+
+  startGame = () => {
+    this.setState({
+      gameStart: true
+    })
   }
 
   handleClick = (i) => {
@@ -18,10 +25,13 @@ class Game extends Component {
     const current = history[history.length - 1];
     const squaresCopy = current.squares.slice()
 
-    if (calculateWinner(squaresCopy).winner || squaresCopy[i]) {
+    //Ends game, prevents overwriting moves, and checks that game has started
+    if (calculateWinner(squaresCopy).winner || squaresCopy[i] || !
+      this.state.gameStart) {
       return
     }
 
+    //Places current players move
     if (this.state.xIsNext) {
       squaresCopy[i] = "X"
     } else {
@@ -38,6 +48,8 @@ class Game extends Component {
     });
   }
 
+
+  //Activate time travel
   jumpTo = (step) => {
     this.setState({
       stepNumber: step,
@@ -69,6 +81,24 @@ class Game extends Component {
 
     return (
       <div className="game">
+        <div className="form">
+          <h3>Options:</h3>
+          <div>
+            <input type="radio" id="idPVP" name="players" value="pvp" defaultChecked />Multiplayer
+            <input type="radio" id="idPVE" name="players" value="pve" />vs. AI
+          </div>
+          
+          <div>
+            <input type="radio" id="idPlayerStart" name="turn order" value="player start" defaultChecked />Player Starts
+            <input type="radio" id="idAIStart" name="turn order" value="ai start" />AI Starts
+          </div> 
+
+          <div>
+            <button id="idPlay" onClick={this.startGame}>Play</button>
+          </div>
+        </div>
+
+
         <div className="game-board">
           <Board squares={current.squares} line={win.winner ? win.line : []} onClick={(i) => this.handleClick(i)} />
         </div>
