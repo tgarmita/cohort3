@@ -1,3 +1,14 @@
+//Nov21
+export const summarizePeople = (peopleArray) => {
+    const summary = {};
+    const peopleABBC = filterProvinces(peopleArray);
+
+    summary.totalPeople = peopleABBC.length;
+    summary.totalAge = peopleABBC.reduce(((accumulator, person) => accumulator + person.age), 0);
+    summary.averageAge = summary.totalAge / summary.totalPeople;
+    return summary;
+}
+
 
 //Nov8 - Callback Exercise (Part 1)
 export const filterProvinces = (peopleArray, callBackF = array => array) => {
