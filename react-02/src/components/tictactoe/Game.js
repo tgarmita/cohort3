@@ -11,16 +11,24 @@ class Game extends Component {
       xIsNext: true,
       gameStart: false
     }
-    this.startGame= this.startGame.bind(this);
+    this.players = "pve";
   }
 
   startGame = () => {
     this.setState({
       gameStart: true
     })
+
+    let pvp = document.getElementById("idPVP")
+
+    if (pvp.checked) {
+      this.players = "pvp"
+      console.log(this.players)
+    }
   }
 
-  handleClick = (i) => {
+
+  handleClick = async (i) => {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squaresCopy = current.squares.slice()
@@ -37,7 +45,7 @@ class Game extends Component {
     } else {
       squaresCopy[i] = "O"
     }
-    this.setState(state => {
+    await this.setState(state => {
       return {
         history: history.concat([{
           squares: squaresCopy,
@@ -46,6 +54,12 @@ class Game extends Component {
         xIsNext: !state.xIsNext
       }
     });
+
+    //If Os turn - run AIs next move
+    if (!this.state.xIsNext && this.players === "pve") {
+      this.expert(squaresCopy);
+    }
+
   }
 
 
@@ -57,7 +71,75 @@ class Game extends Component {
     })
   }
 
+  expert(squares) {
+    console.log("computer goes")
+    const pick = this.evaluateSquares(squares);
+    this.handleClick(pick);
+  }
 
+  evaluateSquares(squares) {
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+
+    let squareValues = [1, 0, 1, 0, 3, 0, 1, 0, 1];
+    console.log(squares)
+
+    for (let i = 0; i < lines.length; i++) {
+      const [a, b, c] = lines[i];
+      if ((squares[a] === 'X' && squares[b] === 'X') || (squares[a] === 'X' && squares[c] === 'X') || (squares[b] === 'X' && squares[c] === 'X')) {
+        squareValues[a] = 8;
+        squareValues[b] = 8;
+        squareValues[c] = 8;
+
+      }
+      if ((squares[a] === 'O' && squares[b] === 'O') || (squares[a] === 'O' && squares[c] === 'O') || (squares[b] === 'O' && squares[c] === 'O')) {
+        squareValues[a] = 10;
+        squareValues[b] = 10;
+        squareValues[c] = 10;
+
+      }
+      if(i>5){
+        if((squares[a] === 'X' && !squares[b] && !squares[c]) || (squares[c] === 'X' && !squares[a] && !squares[b])){
+          squareValues[a] = 5;
+          squareValues[c] = 5;
+      }
+    }
+  }
+   
+
+    //Assigns -1 to squares already taken
+    squareValues = squareValues.map((ele, i) => {
+      if (squares[i]) {
+        return -1;
+      }
+      return ele;
+    })
+
+
+    let index;
+    let highest = -100;
+
+    squareValues.forEach((ele, i) => {
+      if (ele > highest) {
+        highest = ele;
+        index = i;
+      }
+    })
+    // const pick = getRandomIntInclusive(0, 8);
+    console.log(squareValues)
+
+
+    const pick = index;
+    return pick;
+  }
 
   render() {
     const history = this.state.history;
@@ -81,17 +163,22 @@ class Game extends Component {
 
     return (
       <div className="game">
-        <div className="form">
+        <div className="options">
           <h3>Options:</h3>
           <div>
-            <input type="radio" id="idPVP" name="players" value="pvp" defaultChecked />Multiplayer
-            <input type="radio" id="idPVE" name="players" value="pve" />vs. AI
+            <input type="radio" id="idPVP" name="players" value="pvp" />Multiplayer
+            <input type="radio" id="idPVE" name="players" value="pve" defaultChecked />vs. AI
           </div>
-          
+
           <div>
             <input type="radio" id="idPlayerStart" name="turn order" value="player start" defaultChecked />Player Starts
             <input type="radio" id="idAIStart" name="turn order" value="ai start" />AI Starts
-          </div> 
+          </div>
+
+          <div>
+            <input type="radio" id="idPlayerStart" name="difficulty" value="expert" />Hard
+            <input type="radio" id="idAIStart" name="difficulty" value="hard" defaultChecked />Expert
+          </div>
 
           <div>
             <button id="idPlay" onClick={this.startGame}>Play</button>
@@ -113,6 +200,9 @@ class Game extends Component {
 
 export default Game;
 
+function getRandomIntInclusive(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 function calculateWinner(squares) {
   const lines = [
