@@ -1,4 +1,7 @@
 import * as functions from './daily'
+//Nov22
+
+
 //Nov21
 test('summarizePeople() return object of total number of people, total age, and the average age - from Alberta or BC only', () => {
     expect(functions.summarizePeople(people)).toEqual({ totalPeople: 22, totalAge: 838, averageAge: 38.09090909090909 });
