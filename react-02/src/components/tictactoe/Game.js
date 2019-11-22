@@ -12,18 +12,33 @@ class Game extends Component {
       gameStart: false
     }
     this.players = "pve";
+    this.difficulty = "expert";
   }
 
-  startGame = () => {
+  startGame = async () => {
+    let pvp = document.getElementById("idPVP")
+    let aiStart = document.getElementById("idAIStart")
+    let hard = document.getElementById("idHard")
+
     this.setState({
       gameStart: true
     })
 
-    let pvp = document.getElementById("idPVP")
-
     if (pvp.checked) {
       this.players = "pvp"
-      console.log(this.players)
+    }
+
+    if (aiStart.checked) {
+      await this.setState({
+        xIsNext: false
+      })
+      if (!this.state.xIsNext && this.players === "pve") {
+        this.computerMove(this.state.history[0].squares);
+      }
+    }
+
+    if (hard.checked) {
+      this.difficulty = "hard"
     }
   }
 
@@ -33,13 +48,11 @@ class Game extends Component {
     const current = history[history.length - 1];
     const squaresCopy = current.squares.slice()
 
-    //Ends game, prevents overwriting moves, and checks that game has started
     if (calculateWinner(squaresCopy).winner || squaresCopy[i] || !
       this.state.gameStart) {
       return
     }
 
-    //Places current players move
     if (this.state.xIsNext) {
       squaresCopy[i] = "X"
     } else {
@@ -55,15 +68,12 @@ class Game extends Component {
       }
     });
 
-    //If Os turn - run AIs next move
     if (!this.state.xIsNext && this.players === "pve") {
-      this.expert(squaresCopy);
+      this.computerMove(squaresCopy);
     }
-
   }
 
 
-  //Activate time travel
   jumpTo = (step) => {
     this.setState({
       stepNumber: step,
@@ -71,11 +81,12 @@ class Game extends Component {
     })
   }
 
-  expert(squares) {
-    console.log("computer goes")
+  
+  computerMove(squares) {
     const pick = this.evaluateSquares(squares);
     this.handleClick(pick);
   }
+
 
   evaluateSquares(squares) {
     const lines = [
@@ -90,32 +101,36 @@ class Game extends Component {
     ];
 
     let squareValues = [1, 0, 1, 0, 3, 0, 1, 0, 1];
-    console.log(squares)
 
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
+      if (i === 0 || i === 2 || i === 3 || i === 5) {
+        if (!squares[a] && squares[b] && !squares[c]) {
+          squareValues[a] += 1;
+          squareValues[c] += 1;
+        }
+
+      }
+      if (i > 5) {
+        if (squares[a] === 'X' && squares[c] === 'X') {
+          squareValues[1] += 5;
+          squareValues[3] += 5;
+          squareValues[5] += 5;
+          squareValues[7] += 5;
+        }
+      }
       if ((squares[a] === 'X' && squares[b] === 'X') || (squares[a] === 'X' && squares[c] === 'X') || (squares[b] === 'X' && squares[c] === 'X')) {
         squareValues[a] = 8;
         squareValues[b] = 8;
         squareValues[c] = 8;
-
       }
       if ((squares[a] === 'O' && squares[b] === 'O') || (squares[a] === 'O' && squares[c] === 'O') || (squares[b] === 'O' && squares[c] === 'O')) {
         squareValues[a] = 10;
         squareValues[b] = 10;
         squareValues[c] = 10;
-
-      }
-      if(i>5){
-        if((squares[a] === 'X' && !squares[b] && !squares[c]) || (squares[c] === 'X' && !squares[a] && !squares[b])){
-          squareValues[a] = 5;
-          squareValues[c] = 5;
       }
     }
-  }
-   
 
-    //Assigns -1 to squares already taken
     squareValues = squareValues.map((ele, i) => {
       if (squares[i]) {
         return -1;
@@ -123,23 +138,27 @@ class Game extends Component {
       return ele;
     })
 
-
     let index;
     let highest = -100;
+    let secondHighest = -100;
+    let secondIndex;
 
     squareValues.forEach((ele, i) => {
       if (ele > highest) {
+        secondHighest = highest;
+        secondIndex = index;
         highest = ele;
         index = i;
       }
     })
-    // const pick = getRandomIntInclusive(0, 8);
-    console.log(squareValues)
 
-
-    const pick = index;
-    return pick;
+    if (this.difficulty === "hard" && secondHighest > 0 && Math.random() <= 0.2) {
+      console.log("Suboptimal move")
+      return secondIndex
+    }
+    return index;
   }
+
 
   render() {
     const history = this.state.history;
@@ -159,6 +178,8 @@ class Game extends Component {
 
     if (win.winner) {
       status = "Winner: " + win.winner;
+    } else if (this.state.stepNumber === 9) {
+      status = "Tie game";
     }
 
     return (
@@ -176,15 +197,14 @@ class Game extends Component {
           </div>
 
           <div>
-            <input type="radio" id="idPlayerStart" name="difficulty" value="expert" />Hard
-            <input type="radio" id="idAIStart" name="difficulty" value="hard" defaultChecked />Expert
+            <input type="radio" id="idExpert" name="difficulty" value="expert" defaultChecked />Expert
+            <input type="radio" id="idHard" name="difficulty" value="hard" />Hard
           </div>
 
           <div>
             <button id="idPlay" onClick={this.startGame}>Play</button>
           </div>
         </div>
-
 
         <div className="game-board">
           <Board squares={current.squares} line={win.winner ? win.line : []} onClick={(i) => this.handleClick(i)} />
@@ -199,10 +219,6 @@ class Game extends Component {
 }
 
 export default Game;
-
-function getRandomIntInclusive(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 
 function calculateWinner(squares) {
   const lines = [
