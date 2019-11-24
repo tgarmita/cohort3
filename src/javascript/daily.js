@@ -1,21 +1,42 @@
 //Nov22
 let myArray = [
-	{num: 5,str: "apples", origin:"BC"},
-	{num: 7,str: "oranges", origin:"Florida"},
-	{num: 2,str: "lemons", origin:"Mexico"},
-	{num: 8,str: "bananas", origin:"Ecuador"},
-	{num: 6,str: "avocados", origin:"Mexico"},
-	{num: 4,str: "pineapple", origin:"Brazil"},
-	{num: 3,str: "blueberries", origin:"Chile"},
-	{num: 9,str: "pears", origin:"Oregon"},
-	{num: 1,str: "cantaloupe", origin:"California"}
+    { num: 5, str: "apples", origin: "BC" },
+    { num: 7, str: "oranges", origin: "Florida" },
+    { num: 2, str: "lemons", origin: "Mexico" },
+    { num: 8, str: "bananas", origin: "Ecuador" },
+    { num: 6, str: "avocados", origin: "Mexico" },
+    { num: 4, str: "pineapple", origin: "Brazil" },
+    { num: 3, str: "blueberries", origin: "Chile" },
+    { num: 9, str: "pears", origin: "Oregon" },
+    { num: 1, str: "cantaloupe", origin: "California" }
 ];
 //
 // Do the statements below 3 times, one for each type of function
 //
 // myArray.sort(.....enter code here
-// );
-console.log("myArray = ", myArray);
+
+export const sortFunctions = () => {
+    myArray.sort(function (a, b) {
+        return a.num - b.num
+    });
+    console.log("myArray = ", myArray);
+
+    myArray.sort(function fruitSort(a, b) {
+        if (a.str < b.str) return -1;
+        if (a.str > b.str) return 1;
+        return 0
+    });
+    console.log("myArray = ", myArray);
+
+    myArray.sort((a, b) => {
+        if (a.origin < b.origin) return 1;
+        if (a.origin > b.origin) return -1;
+        return 0
+    });
+    console.log("myArray = ", myArray);
+
+    return myArray
+}
 
 
 //Nov21

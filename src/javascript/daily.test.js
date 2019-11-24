@@ -1,6 +1,8 @@
 import * as functions from './daily'
 //Nov22
-
+test('sortFunctions()', () => {
+    expect(functions.sortFunctions()[0]).toEqual({ num: 9, str: "pears", origin: "Oregon" })
+});
 
 //Nov21
 test('summarizePeople() return object of total number of people, total age, and the average age - from Alberta or BC only', () => {
