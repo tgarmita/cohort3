@@ -8,6 +8,7 @@ import bankIcon from './images/piggy-bank.svg';
 import Icon from './components/Icon';
 import Starter from './components/starter/Starter';
 import Game from './components/tictactoe/Game';
+import AccountsApp from './components/accounts/AccountsApp';
 
 
 class App extends Component {
@@ -18,7 +19,7 @@ class App extends Component {
     }
 
     this.style = { backgroundColor: '#d4bea7' };
-    this.icons = [logo, tictactoeIcon, communityIcon, bankIcon];
+    this.icons = [logo, tictactoeIcon, bankIcon, communityIcon];
   }
 
   onSelect = (event) => {
@@ -37,6 +38,8 @@ class App extends Component {
   showPage = () => {
     if (this.state.selected === logo) return <Starter logo={logo}/>;
     if (this.state.selected === tictactoeIcon) return <Game />;
+    if (this.state.selected === bankIcon) return <AccountsApp />;
+
   }
 
   render() {
