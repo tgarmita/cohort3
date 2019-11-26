@@ -1,4 +1,19 @@
 import * as functions from './daily'
+
+//Nov26
+const accountArray = [
+    { name: "Primary", balance: 15 },
+    { name: "Chequing", balance: 55 },
+    { name: "Savings", balance: 100 }
+];
+
+test('findBalanceByAccountName()', () => {
+    expect(functions.findBalanceByAccountName(accountArray,"Savings")).toEqual(100)
+    expect(functions.findBalanceByAccountName(accountArray,"Vacation")).toEqual("Account not found")
+});
+
+
+
 //Nov22
 test('sortFunctions()', () => {
     expect(functions.sortFunctions()[0]).toEqual({ num: 9, str: "pears", origin: "Oregon" })

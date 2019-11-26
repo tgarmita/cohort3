@@ -1,3 +1,20 @@
+//Nov26
+export const findBalanceByAccountName = (accountArray, AccountName) => {
+    let accountBalance = "Account not found";
+
+    for (let account of accountArray) {
+        const [key, value] = Object.entries(account)
+
+        if (key[1] === AccountName) {
+            accountBalance = value[1];
+        }
+    }
+    return accountBalance;
+}
+
+
+
+
 //Nov22
 let myArray = [
     { num: 5, str: "apples", origin: "BC" },
