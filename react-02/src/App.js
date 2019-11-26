@@ -15,7 +15,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      selected: tictactoeIcon
+      selected: bankIcon
     }
 
     this.style = { backgroundColor: '#d4bea7' };
@@ -23,14 +23,15 @@ class App extends Component {
   }
 
   onSelect = (event) => {
-    console.log(event.target.name)
-    this.setState({
+  this.setState({
       selected: event.target.name
     });
   }
 
+  
+
   renderIcons = () => {
-    return this.icons.map((icon, i) => {
+    return this.icons.map((icon) => {
       return <Icon key={icon} name={icon} image={icon} style={this.state.selected === icon ? this.style : null} onClick={this.onSelect} />
     })
   }
@@ -39,7 +40,6 @@ class App extends Component {
     if (this.state.selected === logo) return <Starter logo={logo}/>;
     if (this.state.selected === tictactoeIcon) return <Game />;
     if (this.state.selected === bankIcon) return <AccountsApp />;
-
   }
 
   render() {
