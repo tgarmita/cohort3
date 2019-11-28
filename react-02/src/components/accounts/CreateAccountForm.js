@@ -1,23 +1,53 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './AccountsApp.css';
 
-function CreateAccountForm(props) {
+class CreateAccountForm extends Component {
+  constructor() {
+    super();
+    this.state = {
+      nameInput: "",
+      balanceInput: ""
+    }
+  }
+
+  handleInputChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  }
+
+  handleSubmit = event => {
+    event.preventDefault(event);
+    this.props.onSubmit(this.state)
+  }
+
+  render() {
     return (
-        <div className="form">
-            <h3>Create New Account</h3>
-            <form>
-            <label>Account Name:
-            <input id="idNewAccountName" type="text"/>
-            </label>
-            <label>Initial Balance:
-            <span className="input-symbol-dollar"><input className="amount-input-dollar" id="idInitialBalance"
-                type="number" min="0" step="0.01"/></span>
-            </label>
-            <button type='button' id="idAddAccount" onClick={props.onClick}>Add Account</button><br/><br/>
-            <span id="idAccountMessage"></span>
-            </form>
-        </div>
+      <div className="form">
+        <h3>Create New Account</h3>
+        <form onSubmit={this.onSubmit}>
+          <label>Account Name:
+            <input
+              name="nameInput"
+              type="text"
+              onChange={this.handleInputChange} />
+          </label>
+          <label>Initial Balance:
+            <span className="input-symbol-dollar">
+              <input className="amount-input-dollar"
+                name="balanceInput"
+                onChange={this.handleInputChange}
+                type="number"
+                min="0"
+                step="0.01" />
+            </span>
+          </label>
+          <button>Add Account</button><br /><br />
+          <span id="idAccountMessage"></span>
+        </form>
+      </div>
     );
+  }
 }
 
 export default CreateAccountForm;

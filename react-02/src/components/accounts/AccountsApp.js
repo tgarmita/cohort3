@@ -18,24 +18,20 @@ class AccountsApp extends Component {
 
 
   //Spiking....
-  onClick = () => {
-    //set input states from inputs somehow
-    this.setState({
-        accountList: this.banker.accountArray
-      });
-
-    //Setting state seems necessary for cards to render, even though the below isn't using state
-    
-    this.banker.createAccount("Savings Account", 5)
+  addAccount = (inputs) => {
+    const {nameInput, balanceInput} = inputs;
+    console.log(inputs)
+    this.banker.createAccount(nameInput, balanceInput)
     console.log(this.banker.accountArray)
-    this.renderCards();
-    console.log(this.renderCards());
+    this.setState({
+      accountList: this.banker.accountArray
+    });
+    this.renderCards(); // I dont think this is needed
     }
 
-  renderCards = () => {
-    
-    return this.banker.accountArray.map(account => {
-      console.log(account.name)
+  
+    renderCards = () => {
+    return this.state.accountList.map(account => {
       return <AccountCard key={account.name} name={account.name} />
     })
   }
@@ -50,7 +46,7 @@ class AccountsApp extends Component {
         <div id="idSummaryPanel">
           <h2 className="subheading">Account Summary</h2>
 
-          <CreateAccountForm onClick={this.onClick}/> {/*probably just lift this up into this component*/}
+          <CreateAccountForm onSubmit={this.addAccount}/> {/*probably just lift this up into this component*/}
 
           <div id="idReports" > {/*add logic for hidden className*/}
             <h3>Report</h3>
@@ -62,7 +58,6 @@ class AccountsApp extends Component {
 
         <div id="idCardPanel">
           <h2>Accounts</h2>
-
           {cards}
 
         </div>
