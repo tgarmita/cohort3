@@ -25,7 +25,7 @@ class CreateAccountForm extends Component {
     return (
       <div className="form">
         <h3>Create New Account</h3>
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <label>Account Name:
             <input
               name="nameInput"

@@ -15,7 +15,7 @@ class AccountCard extends Component {
         <label>Amount:
           <span className="input-symbol-dollar"><input className="amount-input-dollar" type="number" min="0"
             step="0.01"/></span>
-          <span>Balance: $</span><span id="idBalance"></span><br/>
+          <span>Balance: $</span><span id="idBalance">{this.state.balance}</span><br/>
         </label>
         <input type="button" value="Balance"/>
         <input id="idDeposit" type="button" value="Deposit"/>
