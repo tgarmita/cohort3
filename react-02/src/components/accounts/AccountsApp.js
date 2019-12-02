@@ -8,36 +8,35 @@ class AccountsApp extends Component {
     super();
 
     this.state = {
-      accountList: []
+      accountController: new AccountController()
     }
-
-    this.banker = new AccountController();
+    this.state.accountController = new AccountController();
   }
 
   addAccount = (inputs) => {
-    const { nameInput, balanceInput } = inputs;
-    console.log(inputs)
-    this.banker.createAccount(nameInput, balanceInput)
-    console.log(this.banker.accountArray)
+    const { nameInput, startingBalanceInput } = inputs;
+    this.state.accountController.createAccount(nameInput, startingBalanceInput)
+
+    // Should copy instead for immutability
+    const controllerUpdate = this.state.accountController
+
     this.setState({
-      accountList: this.banker.accountArray
+      accountController: controllerUpdate
     });
-    if (this.banker.getAccounts().length > 1) {
+    if (this.state.accountController.accountArray.length > 1) {
       document.getElementById("idReports").classList.remove("hidden");
     }
   }
 
-
   renderCards = () => {
-    return this.state.accountList.map(account => {
-      return <AccountCard key={account.name} name={account.name} balance={account.balance} />
+    return this.state.accountController.accountArray.map(account => {
+      return <AccountCard key={account.name} name={account.name} startingBalance={account.currentBalance} account={account} />
     })
   }
 
 
   render() {
     const cards = this.renderCards();
-    console.log(cards)
 
     return (
       <div id="idGridContainer">

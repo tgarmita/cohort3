@@ -6,7 +6,7 @@ class CreateAccountForm extends Component {
     super();
     this.state = {
       nameInput: "",
-      balanceInput: ""
+      startingBalanceInput: ""
     }
   }
 
@@ -19,6 +19,10 @@ class CreateAccountForm extends Component {
   handleSubmit = event => {
     event.preventDefault(event);
     this.props.onSubmit(this.state)
+    this.setState({
+      nameInput: "",
+      startingBalanceInput: ""
+    })
   }
 
   render() {
@@ -30,14 +34,16 @@ class CreateAccountForm extends Component {
             <input
               name="nameInput"
               type="text"
+              value={this.state.nameInput}
               onChange={this.handleInputChange} />
           </label>
           <label>Initial Balance:
             <span className="input-symbol-dollar">
               <input className="amount-input-dollar"
-                name="balanceInput"
-                onChange={this.handleInputChange}
+                name="startingBalanceInput"
                 type="number"
+                value={this.state.startingBalanceInput}
+                onChange={this.handleInputChange}
                 min="0"
                 step="0.01" />
             </span>

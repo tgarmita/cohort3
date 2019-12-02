@@ -27,10 +27,6 @@ export class AccountController {
         this.accountArray.push(new Account(name, Number(startingBalance)));
     }
 
-    getAccounts() {
-        return this.accountArray;
-    }
-
     getAccount(name) {
         return this.accountArray.filter(account => account.name === name)[0];
     }
