@@ -8,36 +8,46 @@ class AccountsApp extends Component {
     super();
 
     this.state = {
-      accountController: new AccountController()
+      totalBalance: 0,
+      mostValuable: "",
+      leastValuable: ""
     }
-    this.state.accountController = new AccountController();
+    this.accountController = new AccountController();
   }
 
   addAccount = (inputs) => {
     const { nameInput, startingBalanceInput } = inputs;
-    this.state.accountController.createAccount(nameInput, startingBalanceInput)
+    this.accountController.createAccount(nameInput, startingBalanceInput)
+    this.calcReport();
+  }
 
-    // Should copy instead for immutability
-    const controllerUpdate = this.state.accountController
-
+  calcReport = () => {
     this.setState({
-      accountController: controllerUpdate
+      totalBalance: 0
     });
-    if (this.state.accountController.accountArray.length > 1) {
-      document.getElementById("idReports").classList.remove("hidden");
+
+    if (this.accountController.accountArray.length > 1) {
+      document.getElementById("idReport").classList.remove("hidden");
+
+      const totalBalanceUpdate = this.accountController.totalAccounts();
+      const mostValuableUpdate = this.accountController.mostValuableAccount().name;
+      const leastValuableUpdate = this.accountController.leastValuableAccount().name;
+
+      this.setState({
+        totalBalance: totalBalanceUpdate,
+        mostValuable: mostValuableUpdate,
+        leastValuable: leastValuableUpdate
+      });
     }
   }
 
   renderCards = () => {
-    return this.state.accountController.accountArray.map(account => {
-      return <AccountCard key={account.name} name={account.name} startingBalance={account.currentBalance} account={account} />
+    return this.accountController.accountArray.map(account => {
+      return <AccountCard key={account.name} name={account.name} startingBalance={account.currentBalance} account={account} calcReport={this.calcReport} />
     })
   }
 
-
   render() {
-    const cards = this.renderCards();
-
     return (
       <div id="idGridContainer">
         <div id="idSummaryPanel">
@@ -45,17 +55,17 @@ class AccountsApp extends Component {
 
           <CreateAccountForm onSubmit={this.addAccount} />
 
-          <div id="idReports" className="hidden" > {/*add logic for hidden className*/}
+          <div id="idReport" className="hidden" > {/*add logic for hidden className*/}
             <h3>Report</h3>
-            <span>Total Balance: </span><span id="idTotal"></span><br />
-            <span>Most Valuable: </span><span id="idMost"></span><br />
-            <span>Least Valuable: </span><span id="idLeast"></span><br />
+            <span>Total Balance: </span><span id="idTotal">{this.state.totalBalance}</span><br />
+            <span>Most Valuable: </span><span id="idMost">{this.state.mostValuable}</span><br />
+            <span>Least Valuable: </span><span id="idLeast">{this.state.leastValuable}</span><br />
           </div>
         </div>
 
         <div id="idCardPanel">
           <h2>Accounts</h2>
-          {cards}
+          {this.renderCards()}
 
         </div>
       </div>

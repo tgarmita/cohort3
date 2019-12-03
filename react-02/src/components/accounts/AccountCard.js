@@ -11,32 +11,34 @@ class AccountCard extends Component {
 
   handleInputChange = event => {
     this.setState({
-      updateBalanceInput: Number(event.target.value)
+      updateBalanceInput: event.target.value
     });
   }
 
   handleDeposit = event => {
     event.preventDefault(event);
-    this.state.account.deposit(this.state.updateBalanceInput)
+    this.state.account.deposit(this.state.updateBalanceInput);
 
-    //can't easily copy (for immutability) because of being in the controller array - don't understand the benefit of state in the child
-    const accountUpdate = this.state.account  
-    
+    const accountUpdate = this.state.account;
     this.setState({
       account: accountUpdate,
       updateBalanceInput: ""
     });
+
+    this.props.calcReport();
   }
 
   handleWithdraw = event => {
     event.preventDefault(event);
-    this.state.account.withdraw(this.state.updateBalanceInput)
-    const accountUpdate = this.state.account  
-    
+    this.state.account.withdraw(this.state.updateBalanceInput);
+
+    const accountUpdate = this.state.account;
     this.setState({
       account: accountUpdate,
       updateBalanceInput: ""
     });
+
+    this.props.calcReport();
   }
 
   render() {

@@ -5,15 +5,11 @@ export class Account {
     }
 
     deposit(value) {
-        this.currentBalance += value;
+        this.currentBalance += Number(value);
     }
 
     withdraw(value) {
-        this.currentBalance -= value;
-    }
-
-    balance() {
-        return this.currentBalance;
+        this.currentBalance -= Number(value);
     }
 }
 
@@ -40,10 +36,12 @@ export class AccountController {
     }
 
     mostValuableAccount() {
-        return this.accountArray.sort((a, b) => b.currentBalance - a.currentBalance)[0];
+        const copy = this.accountArray.slice();
+        return copy.sort((a, b) => b.currentBalance - a.currentBalance)[0];
     }
 
     leastValuableAccount() {
-        return this.accountArray.sort((a, b) => a.currentBalance - b.currentBalance)[0];
+        const copy = this.accountArray.slice();
+        return copy.sort((a, b) => a.currentBalance - b.currentBalance)[0];
     }
 }
