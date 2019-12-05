@@ -49,7 +49,7 @@ class CreateAccountForm extends Component {
             </span>
           </label>
           <button>Add Account</button><br /><br />
-          <span id="idAccountMessage"></span>
+          <p id="idAccountMessage">{this.props.message}</p>
         </form>
       </div>
     );

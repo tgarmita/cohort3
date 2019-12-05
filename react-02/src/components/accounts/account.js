@@ -5,11 +5,11 @@ export class Account {
     }
 
     deposit(value) {
-        this.currentBalance += Number(value);
+        this.currentBalance += Math.round(Number(value) * 100) / 100;
     }
 
     withdraw(value) {
-        this.currentBalance -= Number(value);
+        this.currentBalance -= Math.round(Number(value) * 100) / 100;
     }
 }
 
@@ -20,7 +20,12 @@ export class AccountController {
     }
 
     createAccount(name, startingBalance) {
-        this.accountArray.push(new Account(name, Number(startingBalance)));
+        if (!this.getAccount(name)) {
+            this.accountArray.push(new Account(name, Math.round(Number(startingBalance) * 100) / 100));
+            return "";
+        } else {
+            return `${name} already exists. Please choose another name.`;
+        }
     }
 
     getAccount(name) {

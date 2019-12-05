@@ -15,8 +15,7 @@ class AccountCard extends Component {
     });
   }
 
-  handleDeposit = event => {
-    event.preventDefault(event);
+  handleDeposit = () => {
     this.state.account.deposit(this.state.updateBalanceInput);
 
     const accountUpdate = this.state.account;
@@ -24,12 +23,10 @@ class AccountCard extends Component {
       account: accountUpdate,
       updateBalanceInput: ""
     });
-
     this.props.calcReport();
   }
 
-  handleWithdraw = event => {
-    event.preventDefault(event);
+  handleWithdraw = () => {
     this.state.account.withdraw(this.state.updateBalanceInput);
 
     const accountUpdate = this.state.account;
@@ -37,14 +34,17 @@ class AccountCard extends Component {
       account: accountUpdate,
       updateBalanceInput: ""
     });
-
     this.props.calcReport();
   }
 
+  handleDelete = event => {
+    this.props.removeAccount(this.state.account.name)
+  }
+  
   render() {
     return (
       <div className="card" id="idPrimaryCard">
-        <h3>{this.props.name}</h3><br/>
+        <h3>{this.props.name} Account</h3><br/>
         <label>Amount:
           <span className="input-symbol-dollar"><input className="amount-input-dollar" 
           type="number"
@@ -55,8 +55,9 @@ class AccountCard extends Component {
           </span>
           <span>Balance: $</span><span id="idBalance">{this.state.account.currentBalance}</span><br/>
         </label>
-        <input id="idDeposit" type="button" value="Deposit" onClick={this.handleDeposit}/>
-        <input id="idWithdraw" type="button" value="Withdraw" onClick={this.handleWithdraw}/>
+        <input type="button" value="Deposit" onClick={this.handleDeposit}/>
+        <input type="button" value="Withdraw" onClick={this.handleWithdraw}/>
+        <input className="delete-button" type="button" value="×" onClick={this.handleDelete}/>
       </div>
     );
   }

@@ -6,24 +6,39 @@ import { AccountController } from './account.js'
 class AccountsApp extends Component {
   constructor() {
     super();
-
     this.state = {
-      totalBalance: 0,
+      totalBalance: "",
       mostValuable: "",
-      leastValuable: ""
+      leastValuable: "",
+      message: ""
     }
     this.accountController = new AccountController();
   }
 
   addAccount = (inputs) => {
     const { nameInput, startingBalanceInput } = inputs;
-    this.accountController.createAccount(nameInput, startingBalanceInput)
+    let errorMessage;
+
+    if (!nameInput) {
+      errorMessage = "Please enter an account name.";
+    } else {
+      errorMessage = this.accountController.createAccount(nameInput, startingBalanceInput)
+    }
+
+    this.setState({
+      message: errorMessage
+    });
+    this.calcReport();
+  }
+
+  removeAccount = (accountName) => {
+    this.accountController.removeAccount(accountName);
     this.calcReport();
   }
 
   calcReport = () => {
     this.setState({
-      totalBalance: 0
+      totalBalance: ""
     });
 
     if (this.accountController.accountArray.length > 1) {
@@ -38,12 +53,14 @@ class AccountsApp extends Component {
         mostValuable: mostValuableUpdate,
         leastValuable: leastValuableUpdate
       });
+    } else {
+      document.getElementById("idReport").classList.add("hidden");
     }
   }
 
   renderCards = () => {
     return this.accountController.accountArray.map(account => {
-      return <AccountCard key={account.name} name={account.name} startingBalance={account.currentBalance} account={account} calcReport={this.calcReport} />
+      return <AccountCard key={account.name} name={account.name} startingBalance={account.currentBalance} account={account} calcReport={this.calcReport} removeAccount={this.removeAccount} />
     })
   }
 
@@ -53,9 +70,9 @@ class AccountsApp extends Component {
         <div id="idSummaryPanel">
           <h2 className="subheading">Account Summary</h2>
 
-          <CreateAccountForm onSubmit={this.addAccount} />
+          <CreateAccountForm onSubmit={this.addAccount} message={this.state.message} />
 
-          <div id="idReport" className="hidden" > {/*add logic for hidden className*/}
+          <div id="idReport" className="hidden">
             <h3>Report</h3>
             <span>Total Balance: </span><span id="idTotal">{this.state.totalBalance}</span><br />
             <span>Most Valuable: </span><span id="idMost">{this.state.mostValuable}</span><br />
