@@ -9,13 +9,14 @@ import Icon from './components/Icon';
 import Starter from './components/starter/Starter';
 import Game from './components/tictactoe/Game';
 import AccountsApp from './components/accounts/AccountsApp';
+import CitiesApp from './components/cities/CitiesApp';
 
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      selected: bankIcon
+      selected: communityIcon
     }
 
     this.style = { backgroundColor: '#d4bea7' };
@@ -40,6 +41,8 @@ class App extends Component {
     if (this.state.selected === logo) return <Starter logo={logo}/>;
     if (this.state.selected === tictactoeIcon) return <Game />;
     if (this.state.selected === bankIcon) return <AccountsApp />;
+    if (this.state.selected === communityIcon) return <CitiesApp />;
+
   }
 
   render() {
