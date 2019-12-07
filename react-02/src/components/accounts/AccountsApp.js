@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './AccountsApp.css';
 import CreateAccountForm from './CreateAccountForm';
 import AccountCard from './AccountCard';
 import { AccountController } from './account.js'

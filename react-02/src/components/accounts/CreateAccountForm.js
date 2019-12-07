@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './AccountsApp.css';
 
 class CreateAccountForm extends Component {
   constructor() {
