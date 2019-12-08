@@ -32,7 +32,7 @@ const serverFunctions = {
             province.cityList = data.map(dataCity => new City(dataCity.key, dataCity.name, dataCity.lat, dataCity.long, dataCity.pop));
             console.log("Cities loaded:")
             console.log(province.cityList);
-            return false;
+            return null;
         } catch (error) {
             console.log(error);
             return "Error: Failed to load cities from server.";
@@ -42,7 +42,7 @@ const serverFunctions = {
     async addData(city) {
         try {
             await this.postData(url + 'add', city);
-            return false;
+            return null;
         } catch (error) {
             console.log(error);
             return "Error: Server not responding. Failed to add city.";
