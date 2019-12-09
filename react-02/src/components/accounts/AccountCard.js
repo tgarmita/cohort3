@@ -18,9 +18,7 @@ class AccountCard extends Component {
   handleDeposit = () => {
     this.state.account.deposit(this.state.updateBalanceInput);
 
-    const accountUpdate = this.state.account;
     this.setState({
-      account: accountUpdate,
       updateBalanceInput: ""
     });
     this.props.calcReport();
@@ -29,9 +27,7 @@ class AccountCard extends Component {
   handleWithdraw = () => {
     this.state.account.withdraw(this.state.updateBalanceInput);
 
-    const accountUpdate = this.state.account;
     this.setState({
-      account: accountUpdate,
       updateBalanceInput: ""
     });
     this.props.calcReport();
@@ -44,7 +40,7 @@ class AccountCard extends Component {
   render() {
     return (
       <div className="card" id="idPrimaryCard">
-        <h3>{this.props.name} Account</h3><br/>
+        <h3>{this.state.account.name} Account</h3><br/>
         <label>Amount:
           <span className="input-symbol-dollar"><input className="amount-input-dollar" 
           type="number"

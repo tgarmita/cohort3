@@ -61,7 +61,11 @@ class AccountsApp extends Component {
 
   renderCards = () => {
     return this.accountController.accountArray.map(account => {
-      return <AccountCard key={account.name} name={account.name} startingBalance={account.currentBalance} account={account} calcReport={this.calcReport} removeAccount={this.removeAccount} />
+      return <AccountCard 
+      key={account.name} 
+      account={account} 
+      calcReport={this.calcReport} 
+      removeAccount={this.removeAccount} />
     })
   }
 
