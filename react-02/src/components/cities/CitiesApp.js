@@ -13,7 +13,9 @@ class CitiesApp extends Component {
       mostNorthern: "",
       mostSouthern: "",
       formMessage: "",
-      fetchMessage: ""
+      fetchMessage: "",
+      updatePopInput: "",
+      selectedCity: {}
     }
     this.province = new Community([]);
   }
@@ -59,7 +61,6 @@ class CitiesApp extends Component {
     }
   }
 
-
   removeCity = (key) => {
     this.province.removeCity(key);
     this.calcReport();
@@ -90,9 +91,26 @@ class CitiesApp extends Component {
     }
   }
 
+  onSelectPoint = event => {
+    const selectedPointKey = Number(event.target.attributes.keyid.value);
+    const newSelectedCity = this.province.getCity(selectedPointKey);
+
+    this.setState({
+      selectedCity: newSelectedCity
+    });
+    document.getElementById("idCityTools").classList.remove("hidden");
+  }
+
   renderPoints = () => {
     return this.province.cityList.map(city => {
-      return <CityPoint key={city.key} city={city} calcReport={this.calcReport} removeCity={this.removeCity} />
+      return <CityPoint
+        key={city.key}
+        keyID={city.key}
+        city={city}
+        calcReport={this.calcReport}
+        removeCity={this.removeCity}
+        classNames={this.state.selectedCity.key === city.key ? "city-points city-selected" : "city-points"}
+        onClick={this.onSelectPoint} />
     })
   }
 
@@ -113,29 +131,34 @@ class CitiesApp extends Component {
         </div>
 
         <div id="idMapPanel">
-          <h2>Alberta Map</h2>
-          <span id="idFetchError">{this.state.fetchMessage}</span>
+          <h2 className="subheading2">Alberta Map</h2>
 
-          <div className="map bgimg">
-            <svg id="idSVG" width="330" height="550">
-              {/* <circle cx="50" cy="50" r="7" stroke="black" stroke-width="1" fill="orange" /> */}
-              {this.renderPoints()}
-            </svg>
+          <div>
+            <h3>City Tools</h3>
+            <h4 id="idSelectedCity">{this.state.selectedCity.name || "Select City"}</h4>
+
+            <div id="idCityTools" className="hidden">
+              <button type='button' id="idShow">Show Details</button><br />
+              <button type='button' id="idHowBig">Classification</button><br />
+              <button type='button' id="idWhichSphere">Which Sphere?</button><br />
+              <button type='button' id="idDelete">Delete City</button><br />
+              <label>Pop Change:
+          <input id="idPopChange" type="number" min="0" />
+              </label>
+              <button type='button' id="idMovedIn">Moved In</button>
+              <button type='button' id="idMovedOut">Moved Out</button><br />
+              <span id="idCityMessage"></span>
+            </div>
           </div>
 
-          <h4 id="idSelectedCity">Select City</h4>
+          <div>
+            <span id="idFetchError">{this.state.fetchMessage}</span>
 
-          <div id="idCityTools" className="hidden">
-            <button type='button' id="idShow">Show Details</button>
-            <button type='button' id="idHowBig">Classification</button>
-            <button type='button' id="idWhichSphere">Which Sphere?</button>
-            <button type='button' id="idDelete">Delete City</button><br />
-            <label>Pop Change:
-                    <input id="idPopChange" type="number" min="0" />
-            </label>
-            <button type='button' id="idMovedIn">Moved In</button>
-            <button type='button' id="idMovedOut">Moved Out</button><br />
-            <span id="idCityMessage"></span>
+            <div className="map bgimg">
+              <svg id="idSVG" width="330" height="550">
+                {this.renderPoints()}
+              </svg>
+            </div>
           </div>
 
         </div>

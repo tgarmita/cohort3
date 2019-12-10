@@ -8,7 +8,6 @@ body {
     padding: 20px;
 }
 
-
 #idGridContainer {
     display: grid;
     grid-template-columns: minmax(375px, 500px) auto;
@@ -34,6 +33,8 @@ body {
 }
 
 .subheading2 {
+    grid-column-start: 2;
+    grid-column-end: 3;
     text-align: center;
 }
 
@@ -50,9 +51,13 @@ body {
     color: rgb(214, 6, 6);
 }
 
+
 #idMapPanel {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 1fr 4fr;
     height: 750px;
-    text-align: center;
+    text-align: left;
     padding: 10px;
 }
 
@@ -80,7 +85,6 @@ body {
 #idCityTools  * {
     margin: 2px;
 }
-
 
 #idPopChange {
     width: 100px;

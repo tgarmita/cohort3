@@ -19,12 +19,16 @@ class CityPoint extends Component {
     return (
       <>
       <circle
+        className={this.props.classNames}
+        keyid={this.props.keyID}
         cx={long}
         cy={lat}
         r="7"
         stroke="black"
         strokeWidth="1"
-        fill="orange" />
+        fill="orange" 
+        style ={this.props.style} 
+        onClick={this.props.onClick}/>
 
       <text x={long + 10} y={lat - 10}>{this.state.city.name}</text>
       </>
