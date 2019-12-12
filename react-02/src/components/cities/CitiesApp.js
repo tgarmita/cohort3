@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './CitiesApp.css';
 import CreateCityForm from './CreateCityForm';
 import CityPoint from './CityPoint.js';
+import CityTools from './CityTools.js';
 import { Community } from './cities.js';
 import serverFunctions from './serverFunctions.js'
 
@@ -14,8 +15,7 @@ class CitiesApp extends Component {
       mostSouthern: "",
       formMessage: "",
       fetchMessage: "",
-      updatePopInput: "",
-      selectedCity: {}
+      selectedCity: "",
     }
     this.province = new Community([]);
   }
@@ -80,7 +80,7 @@ class CitiesApp extends Component {
       const totalPopulationUpdate = this.province.getPopulation();
       const mostNorthernUpdate = `${mostNorth.name} at ${mostNorth.lat} latitude`;
       const mostSouthernUpdate = `${mostSouth.name} at ${mostSouth.lat} latitude`;
-      console.log(mostNorthernUpdate)
+
       this.setState({
         totalPopulation: totalPopulationUpdate,
         mostNorthern: mostNorthernUpdate,
@@ -94,12 +94,11 @@ class CitiesApp extends Component {
   onSelectPoint = event => {
     const selectedPointKey = Number(event.target.attributes.keyid.value);
     const newSelectedCity = this.province.getCity(selectedPointKey);
-
     this.setState({
       selectedCity: newSelectedCity
     });
-    document.getElementById("idCityTools").classList.remove("hidden");
   }
+
 
   renderPoints = () => {
     return this.province.cityList.map(city => {
@@ -109,9 +108,23 @@ class CitiesApp extends Component {
         city={city}
         calcReport={this.calcReport}
         removeCity={this.removeCity}
-        classNames={this.state.selectedCity.key === city.key ? "city-points city-selected" : "city-points"}
+        classNames={this.state.selectedCity.key === city.key ? "city-point city-selected" : "city-point"}
         onClick={this.onSelectPoint} />
     })
+  }
+
+  renderTools = () => {
+    if (this.state.selectedCity) {
+      return <CityTools
+        // key={city.key} // don't need react keys because only one at a time
+        // keyID={city.key}
+        city={this.state.selectedCity}
+        calcReport={this.calcReport} //maybe don't need
+        removeCity={this.removeCity}
+      />
+    } else {
+      return null;
+    }
   }
 
   render() {
@@ -137,18 +150,8 @@ class CitiesApp extends Component {
             <h3>City Tools</h3>
             <h4 id="idSelectedCity">{this.state.selectedCity.name || "Select City"}</h4>
 
-            <div id="idCityTools" className="hidden">
-              <button type='button' id="idShow">Show Details</button><br />
-              <button type='button' id="idHowBig">Classification</button><br />
-              <button type='button' id="idWhichSphere">Which Sphere?</button><br />
-              <button type='button' id="idDelete">Delete City</button><br />
-              <label>Pop Change:
-          <input id="idPopChange" type="number" min="0" />
-              </label>
-              <button type='button' id="idMovedIn">Moved In</button>
-              <button type='button' id="idMovedOut">Moved Out</button><br />
-              <span id="idCityMessage"></span>
-            </div>
+            {this.renderTools()}
+
           </div>
 
           <div>

@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 
 class CityPoint extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      city: this.props.city,
-    }
-  }
-
+ 
   coordinateConverter = (y, x) => {
     const lat = 275 - (y - 54.5) * 50;
     const long = 165 + (x + 115) * 33;
@@ -15,7 +9,7 @@ class CityPoint extends Component {
   }
 
   render() {
-    const [lat, long] = this.coordinateConverter(this.state.city.lat, this.state.city.long);
+    const [lat, long] = this.coordinateConverter(this.props.city.lat, this.props.city.long);
     return (
       <>
       <circle
@@ -30,7 +24,7 @@ class CityPoint extends Component {
         style ={this.props.style} 
         onClick={this.props.onClick}/>
 
-      <text x={long + 10} y={lat - 10}>{this.state.city.name}</text>
+      <text x={long + 10} y={lat - 10}>{this.props.city.name}</text>
       </>
     );
   }

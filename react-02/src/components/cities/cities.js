@@ -8,7 +8,11 @@ export class City {
     }
 
     show() {
-        return `Key: ${this.key}, Name: ${this.name}, Lat: ${this.lat}, Long: ${this.long}, Population: ${this.pop}`
+        return `
+Key: ${this.key}
+Lat: ${this.lat}
+Long: ${this.long}
+Population: ${this.pop}`
     }
 
     movedIn(value) {
@@ -26,6 +30,11 @@ export class City {
         if (this.pop > 100) return "Village";
         if (this.pop > 0) return "Hamlet";
         return "Ghost Town";
+    }
+
+    whichSphere() {
+        if (this.lat > 0) return "Northern Hemisphere";
+        return "Southern Hemisphere";
     }
 }
 
@@ -49,21 +58,18 @@ export class Community {
         this.cityList = this.cityList.filter(city => city.key !== key);
     }
 
-    whichSphere(city) {
-        if (city.lat > 0) return "Northern Hemisphere";
-        return "Southern Hemisphere";
-    }
-
     getPopulation() {
         return this.cityList.reduce(((accumulator, city) => accumulator + city.pop), 0);
     }
 
     getMostNorthern() {
-        return this.cityList.sort((a, b) => b.lat - a.lat)[0];
+        const copy = this.cityList.slice();
+        return copy.sort((a, b) => b.lat - a.lat)[0];
     }
 
     getMostSouthern() {
-        return this.cityList.sort((a, b) => a.lat - b.lat)[0];
+        const copy = this.cityList.slice();
+        return copy.sort((a, b) => a.lat - b.lat)[0];
     }
 
     getHighestKey() {

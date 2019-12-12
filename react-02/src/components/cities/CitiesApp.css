@@ -35,7 +35,8 @@ body {
 .subheading2 {
     grid-column-start: 2;
     grid-column-end: 3;
-    text-align: center;
+    text-align: left;
+    margin-left: 100px;
 }
 
 .form > * > *{
@@ -54,7 +55,8 @@ body {
 
 #idMapPanel {
     display: grid;
-    grid-template-columns: 1fr 4fr;
+    /* grid-template-columns: 1fr 4fr; */
+    grid-template-columns: minmax(375px, 500px) auto;
     grid-template-rows: 1fr 1fr 4fr;
     height: 750px;
     text-align: left;
@@ -66,7 +68,7 @@ body {
     opacity: 0.75;
     width: 330px;
     height: 550px;
-    margin: auto;
+    /* margin: auto; */
 }
 
 .city-point:hover {
