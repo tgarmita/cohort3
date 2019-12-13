@@ -52,7 +52,7 @@ const serverFunctions = {
     async updateData(city) {
         try {
             await this.postData(url + 'update', city);
-            return false;
+            return null;
         } catch (error) {
             console.log(error);
             return "Error: Server not responding. Failed to update city population.";
@@ -62,7 +62,7 @@ const serverFunctions = {
     async deleteData(key) {
         try {
             await this.postData(url + 'delete', { key });
-            return false;
+            return null;
         } catch (error) {
             console.log(error);
             return "Error: Server not responding. Failed to delete city."

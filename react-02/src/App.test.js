@@ -5,8 +5,8 @@ import Icon from './components/Icon';
 import Starter from './components/starter/Starter';
 import Game from './components/tictactoe/Game';
 import AccountsApp from './components/accounts/AccountsApp';
-import CreateAccountForm from './components/accounts/CreateAccountForm';
-import AccountCard from './components/accounts/AccountCard';
+import CitiesApp from './components/cities/CitiesApp';
+
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
@@ -38,17 +38,14 @@ it('AccountsApp renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-// it('AccountCard renders without crashing', () => {
-//   const div = document.createElement('div');
-//   ReactDOM.render(<AccountCard />, div);
-//   ReactDOM.unmountComponentAtNode(div);
-// });
-
-it('CreateAccountForm renders without crashing', () => {
+it('CitiesApp renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<CreateAccountForm />, div);
+  ReactDOM.render(<CitiesApp />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
+
+
+
 
 
 

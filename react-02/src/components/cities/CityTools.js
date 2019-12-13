@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import serverFunctions from './serverFunctions.js'
 
 class CityTools extends Component {
   constructor(props) {
@@ -8,7 +9,8 @@ class CityTools extends Component {
       updatePopInput: "",
       details: "",
       classification: "",
-      hemisphere: ""
+      hemisphere: "",
+      popMessage: ""
     }
   }
 
@@ -16,21 +18,53 @@ class CityTools extends Component {
     this.calcCityInfo();
   }
 
-  //I don't think this is ideal - and not working correctly
-  componentDidUpdate(prevProps) {
-    console.log(this.state.city.key)
-    console.log(this.props.city.key)
-    console.log(prevProps.city.key)
-    //Typical usage, don't forget to compare the props
-    if (this.props.city.key !== prevProps.city.key) {
-      this.calcCityInfo();
+  handleInputChange = event => {
+    this.setState({
+      updatePopInput: event.target.value
+    });
+  }
 
-      this.setState({
-        city: this.props.city
-      })
+  handleMovedIn = async () => {
+    const updatePop = this.state.updatePopInput;
+    if (updatePop) {
+      this.state.city.movedIn(updatePop);
+      const errorMessage = await serverFunctions.updateData(this.state.city);
+      if (errorMessage) {
+        this.props.showFetchMessage(errorMessage);
+        this.state.city.movedOut(updatePop);
+      } else {
+        this.setState({
+          popMessage: `${updatePop} moved into ${this.state.city.name}`,
+          updatePopInput: ""
+        });
+        this.calcCityInfo();
+        this.props.calcReport();
+      }
     }
-   }
-  
+  }
+
+  handleMovedOut = async () => {
+    const updatePop = this.state.updatePopInput;
+    if (updatePop) {
+      this.state.city.movedOut(updatePop);
+      const errorMessage = await serverFunctions.updateData(this.state.city);
+      if (errorMessage) {
+        this.props.showFetchMessage(errorMessage);
+        this.state.city.movedIn(updatePop);
+      } else {
+        this.setState({
+          popMessage: `${updatePop} moved out of ${this.state.city.name}`,
+          updatePopInput: ""
+        });
+        this.calcCityInfo();
+        this.props.calcReport();
+      }
+    }
+  }
+
+  handleDelete = () => {
+    this.props.removeCity(this.state.city.key)
+  }
 
   calcCityInfo = () => {
     const detailsUpdate = this.state.city.show();
@@ -47,17 +81,17 @@ class CityTools extends Component {
   render() {
     return (
       <div id="idCityTools">
-        <p style={{whiteSpace: "pre-wrap"}}>{this.state.details}</p><br />
+        <p style={{ whiteSpace: "pre-wrap" }}>{this.state.details}</p><br />
         <span>Classification: </span><span>{this.state.classification}</span><br />
         <span>Hemisphere: </span><span>{this.state.hemisphere}</span><br />
-        
+
         <label>Pop Change:
-          <input id="idPopChange" type="number" min="0" />
+          <input id="idPopChange" type="number" value={this.state.updatePopInput} onChange={this.handleInputChange} min="0" />
         </label>
-        <button type='button' id="idMovedIn">Moved In</button>
-        <button type='button' id="idMovedOut">Moved Out</button><br />
-        <button type='button' id="idDelete">Delete City</button><br />
-        <span id="idCityMessage"></span>
+        <button type='button' id="idMovedIn" onClick={this.handleMovedIn}>Moved In</button>
+        <button type='button' id="idMovedOut" onClick={this.handleMovedOut}>Moved Out</button><br />
+        <button type='button' id="idDelete" onClick={this.handleDelete}>Delete City</button><br />
+        <span id="idCityMessage">{this.state.popMessage}</span>
       </div>
     );
   }

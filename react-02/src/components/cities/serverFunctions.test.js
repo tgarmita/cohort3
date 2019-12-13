@@ -35,9 +35,6 @@ describe('Class methods update data on server using API CRUD functionality', () 
         expect(province.cityList.length).toEqual(5);
         expect(province.cityList[2]).toEqual(data[2]);
         expect(province.getHighestKey()).toEqual(5);
-
-        // //test error catch
-        // expect(await serverFunctions.loadData()).toEqual("Error: Failed to load cities from server.");
     });
 
 
@@ -55,9 +52,6 @@ describe('Class methods update data on server using API CRUD functionality', () 
         expect(data[0].name).toBe("Caroline");
 
         expect(province.cityList[0]).toEqual(data[0]);
-
-        // //test error catch
-        // expect(await serverFunctions.addData().toEqual("Error: Server not responding. Failed to add city.");
     });
 
 

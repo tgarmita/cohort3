@@ -23,13 +23,9 @@ class CitiesApp extends Component {
   componentDidMount = async () => {
     const errorMessage = await serverFunctions.loadData(this.province);
     if (errorMessage) {
-      this.setState({
-        fetchMessage: errorMessage
-      });
+      this.showFetchMessage(errorMessage);
     } else if (this.province.cityList.length < 1) {
-      this.setState({
-        fetchMessage: "Warning: Server database is empty."
-      });
+      this.showFetchMessage("Warning: Server database is empty.")
     } else {
       this.calcReport()
     }
@@ -51,19 +47,31 @@ class CitiesApp extends Component {
 
       const errorMessage = await serverFunctions.addData(newCity);
       if (errorMessage) {
-        // province.deleteCity(key); // maybe copy controller and revert instead?
-        this.setState({
-          fetchMessage: errorMessage
-        });
+        this.province.deleteCity(key); // maybe copy controller and revert instead?
+        this.showFetchMessage(errorMessage);
       } else {
         this.calcReport();
       }
     }
   }
 
-  removeCity = (key) => {
-    this.province.removeCity(key);
-    this.calcReport();
+  removeCity = async (key) => {
+    const errorMessage = await serverFunctions.deleteData(key);
+    if (errorMessage) {
+      this.showFetchMessage(errorMessage);
+    } else {
+      this.province.deleteCity(key);
+      this.setState({
+        selectedCity: ""
+      });
+      this.calcReport();
+    }
+  }
+
+  showFetchMessage = (message) => {
+    this.setState({
+      fetchMessage: message
+    });
   }
 
   calcReport = () => {
@@ -99,7 +107,6 @@ class CitiesApp extends Component {
     });
   }
 
-
   renderPoints = () => {
     return this.province.cityList.map(city => {
       return <CityPoint
@@ -116,11 +123,11 @@ class CitiesApp extends Component {
   renderTools = () => {
     if (this.state.selectedCity) {
       return <CityTools
-        // key={city.key} // don't need react keys because only one at a time
-        // keyID={city.key}
+        key={this.state.selectedCity.key} //***When a key changes, React will create a new component instance
         city={this.state.selectedCity}
-        calcReport={this.calcReport} //maybe don't need
+        calcReport={this.calcReport}
         removeCity={this.removeCity}
+        showFetchMessage={this.showFetchMessage}
       />
     } else {
       return null;

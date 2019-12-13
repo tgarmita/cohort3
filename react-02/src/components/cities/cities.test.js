@@ -16,7 +16,12 @@ describe('City Testing', () => {
     });
 
     test('show() returns display string of properties', () => {
-        expect(lethbridge.show()).toEqual("Key: 4, Name: Lethbridge, Lat: 49.7, Long: -112.8, Population: 101500");
+        expect(lethbridge.show()).toEqual(`
+Key: 4
+Lat: 49.7
+Long: -112.8
+Population: 101500`
+            );
     });
 
     test('movedIn(value) adds value to pop', () => {
@@ -37,6 +42,11 @@ describe('City Testing', () => {
         expect(bearberry.howBig()).toEqual("Hamlet");
         expect(spooky.howBig()).toEqual("Ghost Town");
     });
+
+    test('whichSphere(city) returns appropriate hemisphere', () => {
+        expect(lethbridge.whichSphere()).toEqual("Northern Hemisphere");
+        expect(spooky.whichSphere()).toEqual("Southern Hemisphere");
+    });
 });
 
 describe('Community Controller Testing', () => {
@@ -56,11 +66,6 @@ describe('Community Controller Testing', () => {
         province.deleteCity(5);
         expect(province.cityList.length).toEqual(4);
         expect(province.cityList[1].name).toEqual("Sundre");
-    });
-
-    test('whichSphere(city) returns appropriate hemisphere', () => {
-        expect(province.whichSphere(province.getCity(6))).toEqual("Northern Hemisphere");
-        expect(province.whichSphere(province.getCity(9))).toEqual("Southern Hemisphere");
     });
 
     test('getPopulation() returns total population of community', () => {
