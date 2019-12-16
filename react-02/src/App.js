@@ -4,23 +4,25 @@ import logo from './images/logo.svg';
 import communityIcon from './images/community.svg';
 import tictactoeIcon from './images/tic-tac-toe.svg';
 import bankIcon from './images/piggy-bank.svg';
+import linkIcon from './images/breaking-chain.svg';
 
 import Icon from './components/Icon';
 import Starter from './components/starter/Starter';
 import Game from './components/tictactoe/Game';
 import AccountsApp from './components/accounts/AccountsApp';
 import CitiesApp from './components/cities/CitiesApp';
+import LinkedListApp from './components/linked-list/LinkedListApp';
 
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      selected: communityIcon
+      selected: linkIcon
     }
 
     this.style = { backgroundColor: '#d4bea7' };
-    this.icons = [logo, tictactoeIcon, bankIcon, communityIcon];
+    this.icons = [logo, tictactoeIcon, bankIcon, communityIcon, linkIcon];
   }
 
   onSelect = (event) => {
@@ -42,6 +44,7 @@ class App extends Component {
     if (this.state.selected === tictactoeIcon) return <Game />;
     if (this.state.selected === bankIcon) return <AccountsApp />;
     if (this.state.selected === communityIcon) return <CitiesApp />;
+    if (this.state.selected === linkIcon) return <LinkedListApp />;
 
   }
 
