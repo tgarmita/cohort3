@@ -10,13 +10,6 @@ export class ListNode {
     }
 }
 
-// first ⇒ position to the first node
-// last ⇒ position to the last node
-// next ⇒ move to the next node
-// previous ⇒ backup one node (how are we going to do this?)
-// insert ⇒ inserts a new node after the current node (which node will be the current node after the insertion?)
-// delete ⇒ delete the current node (which node will be the current node after the deletion?)
-
 
 export class LinkedList {
     constructor() {
@@ -24,16 +17,52 @@ export class LinkedList {
         this.position = null;
     }
 
-    //currently does not change position except for assigning to first node
+    first() {
+        this.position = this.head;
+    }
+
+    last() {
+        while (this.position.forwardNode) {
+            this.next();
+        }
+    }
+
+    next() {
+        this.position = this.position.forwardNode;
+    }
+
+    previous() {
+        let previousNode = this.head;
+
+        while (this.position !== this.head && previousNode.forwardNode !== this.position) {
+            previousNode = previousNode.forwardNode;
+        }
+        this.position = previousNode;
+    }
+
+    //changes position to added node
     insert(subject, amount) {
         if (!this.head) {
             this.head = new ListNode(subject, amount)
-            this.position = this.head; //Probably remove but need for now
+            this.position = this.head;
         } else {
             const newNode = new ListNode(subject, amount);
             newNode.forwardNode = this.position.forwardNode;
             this.position.forwardNode = newNode;
-            //need to return anything?
+            this.position = newNode;
+        }
+    }
+
+    delete() {
+        //deletes head -changes head and position to next node
+        if (this.position === this.head) {
+            this.head = this.head.forwardNode;
+            this.position = this.head;
+           
+        //delete current - changes position to previous node
+        } else {
+            this.previous();
+            this.position.forwardNode = this.position.forwardNode.forwardNode;
         }
     }
 }
