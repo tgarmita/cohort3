@@ -45,6 +45,9 @@ test('LinkedList methods work correctly in all cases', () => {
     expect(list.position.forwardNode.subject).toEqual("Alex");
 
     list.last();
+    list.next();
+
+    expect(list.position.subject).toEqual("Alex");
 
     list.insert("Mary", 55);
     list.insert("Jill", 22);
@@ -63,6 +66,10 @@ test('LinkedList methods work correctly in all cases', () => {
 
     expect(list.head.subject).toEqual("Alex");
 
-    console.log(list.head);
+    list.last();
+    list.insert("John", 30);
+    list.insert("Kate", 20);
+
+    expect(list.totalAmounts()).toEqual(100);
 });
 

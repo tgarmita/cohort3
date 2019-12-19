@@ -28,12 +28,13 @@ export class LinkedList {
     }
 
     next() {
-        this.position = this.position.forwardNode;
+        if (this.position.forwardNode) {
+            this.position = this.position.forwardNode;
+        }
     }
 
     previous() {
         let previousNode = this.head;
-
         while (this.position !== this.head && previousNode.forwardNode !== this.position) {
             previousNode = previousNode.forwardNode;
         }
@@ -54,15 +55,25 @@ export class LinkedList {
     }
 
     delete() {
-        //deletes head -changes head and position to next node
+        //deletes head - changes head and position to next node
         if (this.position === this.head) {
             this.head = this.head.forwardNode;
             this.position = this.head;
-           
-        //delete current - changes position to previous node
+
+            //delete current - changes position to previous node
         } else {
             this.previous();
             this.position.forwardNode = this.position.forwardNode.forwardNode;
         }
+    }
+
+    totalAmounts() {
+        let total = 0;
+        this.position = this.head;
+        while (this.position) {
+            total += this.position.amount;
+            this.position = this.position.forwardNode;
+        }
+        return total;
     }
 }
