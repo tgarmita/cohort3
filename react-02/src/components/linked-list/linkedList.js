@@ -41,7 +41,6 @@ export class LinkedList {
         this.position = previousNode;
     }
 
-    //changes position to added node
     insert(subject, amount) {
         if (!this.head) {
             this.head = new ListNode(subject, amount)
@@ -55,12 +54,9 @@ export class LinkedList {
     }
 
     delete() {
-        //deletes head - changes head and position to next node
         if (this.position === this.head) {
             this.head = this.head.forwardNode;
             this.position = this.head;
-
-            //delete current - changes position to previous node
         } else {
             this.previous();
             this.position.forwardNode = this.position.forwardNode.forwardNode;
@@ -69,10 +65,10 @@ export class LinkedList {
 
     totalAmounts() {
         let total = 0;
-        this.position = this.head;
-        while (this.position) {
-            total += this.position.amount;
-            this.position = this.position.forwardNode;
+        let node = this.head;
+        while (node) {
+            total += node.amount;
+            node = node.forwardNode;
         }
         return total;
     }
