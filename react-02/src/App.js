@@ -5,6 +5,7 @@ import communityIcon from './images/community.svg';
 import tictactoeIcon from './images/tic-tac-toe.svg';
 import bankIcon from './images/piggy-bank.svg';
 import linkIcon from './images/breaking-chain.svg';
+import stackIcon from './images/stack.svg';
 
 import Icon from './components/Icon';
 import Starter from './components/starter/Starter';
@@ -12,17 +13,18 @@ import Game from './components/tictactoe/Game';
 import AccountsApp from './components/accounts/AccountsApp';
 import CitiesApp from './components/cities/CitiesApp';
 import LinkedListApp from './components/linked-list/LinkedListApp';
+import FifoLifoApp from './components/fifo-lifo/FifoLifoApp';
 
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      selected: linkIcon
+      selected: stackIcon
     }
 
     this.style = { backgroundColor: '#d4bea7' };
-    this.icons = [logo, tictactoeIcon, bankIcon, communityIcon, linkIcon];
+    this.icons = [logo, tictactoeIcon, bankIcon, communityIcon, linkIcon, stackIcon];
   }
 
   onSelect = (event) => {
@@ -32,7 +34,6 @@ class App extends Component {
   }
 
   
-
   renderIcons = () => {
     return this.icons.map((icon) => {
       return <Icon key={icon} name={icon} image={icon} style={this.state.selected === icon ? this.style : null} onClick={this.onSelect} />
@@ -45,7 +46,7 @@ class App extends Component {
     if (this.state.selected === bankIcon) return <AccountsApp />;
     if (this.state.selected === communityIcon) return <CitiesApp />;
     if (this.state.selected === linkIcon) return <LinkedListApp />;
-
+    if (this.state.selected === stackIcon) return <FifoLifoApp />;
   }
 
   render() {
