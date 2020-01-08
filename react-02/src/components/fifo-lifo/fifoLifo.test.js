@@ -59,7 +59,6 @@ test('pop() adds item to top of stack', () => {
 test('bag instantiates randomly', () => {
     let bagController = new BagController;
 
-    expect(bagController.shapes).toEqual(["s", "z", "j", "l", "t", "i", "o"]);
     expect(bagController.bag).not.toEqual(bagController.shapes);
 });
 

@@ -8,15 +8,18 @@ const lifo = new Stack();
 const bagController = new BagController();
 
 const FifoLifoApp = () => {
+  //Should refactor to not have stack and queue in react state (could show next or removed instead)
   const [queue, setQueue] = useState(fifo.queue);
   const [stack, setStack] = useState(lifo.stack);
 
   const handlePutIn = () => {
-    fifo.enqueue(bagController.pull());
+    const shape = bagController.pull();
+
+    fifo.enqueue(shape);
     const queueUpdate = fifo.queue.slice();
     setQueue(queueUpdate);
 
-    lifo.push(bagController.pull());
+    lifo.push(shape);
     const stackUpdate = lifo.stack.slice();
     setStack(stackUpdate);
   }

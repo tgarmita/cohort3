@@ -8,7 +8,11 @@
 }
 
 .lists > * {
-    width: 50px;
+   width: 75px;
    display: inline-block;
    text-align: center;
+}
+
+.shape {
+    padding: 20px;
 }
