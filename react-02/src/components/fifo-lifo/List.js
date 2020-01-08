@@ -1,14 +1,18 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 
 const List = (props) => {
-  /*useEffect(() => {
-      use props.type somehow
-    }); */
 
   const renderList = () => {
-    return props.list.map(function (item) {
+    props.list.reverse();
+
+    let deleteIndex = 0;
+    if(props.type === "queue") {
+      deleteIndex =  props.list.length - 1;
+    }
+    return props.list.map(function (item, i, arr) {
+      console.log(deleteIndex," ", i)
       this.counter = this.counter + 1;
-      return <div key={this.counter}>{item}</div>
+      return <img key={this.counter} src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Tetris_T.svg/32px-Tetris_T.svg.png" style={deleteIndex === i ? { backgroundColor: '#fc0303' } : { backgroundColor: '#ffffff' }}/>
     }, { counter: 0 })
   }
 

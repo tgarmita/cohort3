@@ -1,4 +1,4 @@
-import {Queue, Stack} from './fifoLifo.js'
+import {Queue, Stack, BagController} from './fifoLifo.js'
 
 test('enqueue() adds item to top of the queue', () => {
     let fifo = new Queue;
@@ -53,4 +53,30 @@ test('pop() adds item to top of stack', () => {
     lifo.pop();
 
     expect(lifo.stack[lifo.stack.length -1]).toEqual("square");
+});
+
+
+test('bag instantiates randomly', () => {
+    let bagController = new BagController;
+
+    expect(bagController.shapes).toEqual(["s", "z", "j", "l", "t", "i", "o"]);
+    expect(bagController.bag).not.toEqual(bagController.shapes);
+});
+
+test('pull() returns one shape, and refills the bag once empty', () => {
+    let bagController = new BagController;
+
+    expect(bagController.pull()).not.toBeNull();
+
+    expect(bagController.bag.length).toEqual(6);
+
+    bagController.pull()
+    bagController.pull()
+    bagController.pull()
+    bagController.pull()
+    bagController.pull()
+    bagController.pull()
+    bagController.pull()
+
+    expect(bagController.bag.length).toEqual(6);
 });

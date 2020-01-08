@@ -1,0 +1,14 @@
+.lists {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.1fr 1fr;
+    justify-items: center;
+    align-items: end;
+    height: 500px;
+}
+
+.lists > * {
+    width: 50px;
+   display: inline-block;
+   text-align: center;
+}
