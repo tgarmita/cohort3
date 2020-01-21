@@ -43,7 +43,7 @@ export class BagController {
     /*Based on Durstenfeld shuffle*/
     shuffleArray(array) {
         let array2 = array.slice();
-        for (let i = array2.length - 1; i > 0; i--) {
+        for (let i = 6; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [array2[i], array2[j]] = [array2[j], array2[i]];
         }
