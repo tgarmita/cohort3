@@ -39,6 +39,10 @@ class CitiesApp extends Component {
       this.setState({
         formMessage: "Please enter a city name."
       });
+    } else if ((latInput < 49 || latInput > 60) || (longInput < -120 || longInput > -110)) {
+      this.setState({
+        formMessage: "Please enter a latitude and longitude within Alberta."
+      });
     } else {
       this.setState({
         formMessage: ""
