@@ -1,27 +1,16 @@
-body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-}
-
-.title-section {
-    text-align: center;
-    padding: 20px;
-}
-
-
 #idGridContainer {
     display: grid;
     grid-template-columns: 3fr 2fr;
 }
 
 #idSummaryPanel {
-    background-color: #7D99FE;
     display: grid;
     grid-template-columns: 4fr 2fr;
     grid-template-rows: 1fr 1fr 4fr;
     gap: 15px 15px;
     text-align: left;
-    padding: 10px 50px;
+    padding: 0 50px;
+    max-height: 654px;
 }
 
 .hidden {
@@ -30,10 +19,11 @@ body {
 
 .subheading {
     grid-column-start: span 2;
+    margin-top: 30px;
 }
 
 .subheading2 {
-    text-align: center;
+    margin-top: 30px;
 }
 
 .form > * > *{
@@ -46,7 +36,7 @@ body {
 }
 
 .list-section {
-grid-row-start: span 2;
+    grid-row-start: span 2;
 }
 
 #idNewAccountName {
@@ -57,16 +47,12 @@ grid-row-start: span 2;
     color: rgb(214, 6, 6);
 }
 
-
 #idCardPanel {
-    background-color: #DDE4FF;
-    height: 700px;
+    max-height: 654px;
     text-align: center;
-    padding: 10px;
 }
 
 .card {
-    background-color: #FFE09B;
     margin: 30px;
     padding: 20px;
     border-radius: 5px;

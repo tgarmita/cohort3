@@ -1,9 +1,9 @@
-p {
+.node {
     font-size: 20px;
 }
 
 .input {
-    width: 40px;
+    width: 30px;
 }
 
 .hidden {

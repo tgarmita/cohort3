@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import { AppContext } from '../../context';
 
 class AccountCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        account: this.props.account,
-        updateBalanceInput: ""
-      }
+      account: this.props.account,
+      updateBalanceInput: ""
+    }
   }
 
   handleInputChange = event => {
@@ -36,25 +37,29 @@ class AccountCard extends Component {
   handleDelete = event => {
     this.props.removeAccount(this.state.account.name)
   }
-  
+
   render() {
     return (
-      <div className="card" id="idPrimaryCard">
-        <h3>{this.state.account.name} Account</h3><br/>
-        <label>Amount:
-          <span className="input-symbol-dollar"><input className="amount-input-dollar" 
-          type="number"
-          value={this.state.updateBalanceInput}
-          onChange={this.handleInputChange}
-          min="0"
-          step="0.01"/>
-          </span>
-          <span>Balance: $</span><span id="idBalance">{this.state.account.currentBalance}</span><br/>
-        </label>
-        <input type="button" value="Deposit" onClick={this.handleDeposit}/>
-        <input type="button" value="Withdraw" onClick={this.handleWithdraw}/>
-        <input className="delete-button" type="button" value="×" onClick={this.handleDelete}/>
-      </div>
+      <AppContext.Consumer>
+        {value => (
+          <div className="card" id="idPrimaryCard" style={{ backgroundColor: value.card }} >
+            <h3>{this.state.account.name} Account</h3><br />
+            <label>Amount:
+          <span className="input-symbol-dollar"><input className="amount-input-dollar"
+                type="number"
+                value={this.state.updateBalanceInput}
+                onChange={this.handleInputChange}
+                min="0"
+                step="0.01" />
+              </span>
+              <span>Balance: $</span><span id="idBalance">{this.state.account.currentBalance}</span><br />
+            </label>
+            <input type="button" value="Deposit" onClick={this.handleDeposit} />
+            <input type="button" value="Withdraw" onClick={this.handleWithdraw} />
+            <input className="delete-button" type="button" value="×" onClick={this.handleDelete} />
+          </div>
+        )}
+      </AppContext.Consumer>
     );
   }
 }

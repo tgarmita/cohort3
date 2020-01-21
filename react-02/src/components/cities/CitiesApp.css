@@ -1,66 +1,63 @@
-body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-}
 
-.title-section {
-    text-align: center;
-    padding: 20px;
-}
-
-#idGridContainer {
+#idMainContainer {
     display: grid;
     grid-template-columns: minmax(375px, 500px) auto;
 }
 
-#idSummaryPanel {
-    background-color: #7D99FE;
+#idManagerPanel {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 4fr;
     gap: 15px 15px;
     text-align: left;
-    padding: 10px 0px 10px 30px;
-    height: 750px;
+    padding: 0 0 0 30px;
+    height: 654px;
 }
 
 .hidden {
     visibility: hidden;
 }
 
-.subheading {
+.managerHeading {
     grid-column-start: span 2;
+    margin-top: 30px;
 }
 
-.subheading2 {
+.mapHeading {
     grid-column-start: 2;
     grid-column-end: 3;
     text-align: left;
-    margin-left: 100px;
+    margin: 30px 0 15px 100px;
 }
 
-.form > * > *{
+.city-form > * > * {
     margin: 5px 10px 0px 0px;
+    justify-content: stretch;
+}
+
+.city-form > * > * > * {
+    margin: 5px 10px 0px 10px;
     width: 100px;
 }
 
+
 #idCreateCityMessage {
     color: rgb(214, 6, 6);
+    width: auto;
 }
 
 #idFetchError{
     color: rgb(214, 6, 6);
 }
 
-
 #idMapPanel {
     display: grid;
     /* grid-template-columns: 1fr 4fr; */
     grid-template-columns: minmax(375px, 500px) auto;
     grid-template-rows: 1fr 1fr 4fr;
-    height: 750px;
+    height: 654px;
     text-align: left;
-    padding: 10px;
+    padding: 0 10px 0 10px;
 }
 
 .map{

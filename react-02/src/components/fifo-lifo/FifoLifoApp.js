@@ -6,22 +6,23 @@ import './FifoLifoApp.css'
 const fifo = new Queue();
 const lifo = new Stack();
 const bagController = new BagController();
+const firstPull = bagController.pull();
 
 const FifoLifoApp = () => {
-  //Should refactor to not have stack and queue in react state (could show next or removed instead)
   const [queue, setQueue] = useState(fifo.queue);
   const [stack, setStack] = useState(lifo.stack);
+  const [next, setNext] = useState(firstPull);
 
   const handlePutIn = () => {
-    const shape = bagController.pull();
-
-    fifo.enqueue(shape);
+    fifo.enqueue(next);
     const queueUpdate = fifo.queue.slice();
     setQueue(queueUpdate);
 
-    lifo.push(shape);
+    lifo.push(next);
     const stackUpdate = lifo.stack.slice();
     setStack(stackUpdate);
+
+    setNext(bagController.pull())
   }
 
   const handleTakeOut = () => {
@@ -36,14 +37,18 @@ const FifoLifoApp = () => {
 
   return (
     <div>
-      <div>
+      <div className="buttons-ui">
         <button onClick={handlePutIn}>Put In</button>
         <button onClick={handleTakeOut}>Take Out</button>
       </div>
+
       <div className="lists">
-        <h3>Queue</h3>
-        <h3>Stack</h3>
+        <h3 >Queue</h3>
+        <h4 >Upcoming Shape</h4>
+        <h3 >Stack</h3>
+
         <List list={queue} type="queue" />
+        <img className="next" src={next} alt={next} />
         <List list={stack} type="stack" />
       </div>
     </div>

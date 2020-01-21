@@ -30,7 +30,7 @@ class CreateCityForm extends Component {
 
   render() {
     return (
-      <div className="form">
+      <div className="city-form">
         <h3>Create New City</h3>
         <form onSubmit={this.handleSubmit}>
           <label>City Name:

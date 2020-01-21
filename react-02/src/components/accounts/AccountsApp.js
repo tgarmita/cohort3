@@ -3,6 +3,7 @@ import './AccountsApp.css';
 import CreateAccountForm from './CreateAccountForm';
 import AccountCard from './AccountCard';
 import { AccountController } from './account.js'
+import { AppContext } from '../../context';
 
 class AccountsApp extends Component {
   constructor() {
@@ -61,34 +62,37 @@ class AccountsApp extends Component {
 
   renderCards = () => {
     return this.accountController.accountArray.map(account => {
-      return <AccountCard 
-      key={account.name} 
-      account={account} 
-      calcReport={this.calcReport} 
-      removeAccount={this.removeAccount} />
+      return <AccountCard
+        key={account.name}
+        account={account}
+        calcReport={this.calcReport}
+        removeAccount={this.removeAccount} />
     })
   }
 
   render() {
     return (
       <div id="idGridContainer">
-        <div id="idSummaryPanel">
-          <h2 className="subheading">Account Summary</h2>
+        <AppContext.Consumer>
+          {value => (
+            <div id="idSummaryPanel" style={{ backgroundColor: value.foreground }}>
+              <h2 className="subheading">Account Summary</h2>
 
-          <CreateAccountForm onSubmit={this.addAccount} message={this.state.message} />
+              <CreateAccountForm onSubmit={this.addAccount} message={this.state.message} />
 
-          <div id="idReport" className="hidden">
-            <h3>Report</h3>
-            <span>Total Balance: </span><span id="idTotal">{this.state.totalBalance}</span><br />
-            <span>Most Valuable: </span><span id="idMost">{this.state.mostValuable}</span><br />
-            <span>Least Valuable: </span><span id="idLeast">{this.state.leastValuable}</span><br />
-          </div>
-        </div>
+              <div id="idReport" className="hidden">
+                <h3>Report</h3>
+                <span>Total Balance: </span><span id="idTotal">{this.state.totalBalance}</span><br />
+                <span>Most Valuable: </span><span id="idMost">{this.state.mostValuable}</span><br />
+                <span>Least Valuable: </span><span id="idLeast">{this.state.leastValuable}</span><br />
+              </div>
+            </div>
+          )}
+        </AppContext.Consumer>
 
         <div id="idCardPanel">
-          <h2>Accounts</h2>
+          <h2 className="subheading2">Accounts</h2>
           {this.renderCards()}
-
         </div>
       </div>
     );

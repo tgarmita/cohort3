@@ -1,41 +1,41 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import Square from './Square';
+import { AppContext } from '../../context';
 
+function Board(props) {
+  const theme = useContext(AppContext);
 
-class Board extends Component {
-
-  highlightWin(i) {
-    if (this.props.line.includes(i)) return { backgroundColor: '#d4bea7' };
+  const highlightWin = (i) => {
+    if (props.line.includes(i)) return { backgroundColor: theme.foreground };
   }
 
-  renderSquare(i) {
-    const style = this.highlightWin(i);
+  const renderSquare = (i) => {
+    const style = highlightWin(i);
 
-    return <Square value={this.props.squares[i]} style={style} onClick={() => this.props.onClick(i)} />;
+    return <Square value={props.squares[i]} style={style} onClick={() => props.onClick(i)} />;
   }
 
-  render() {
-    return (
-      <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
+  return (
+    <div>
+      <div className="board-row">
+        {renderSquare(0)}
+        {renderSquare(1)}
+        {renderSquare(2)}
       </div>
-    );
-  }
+      <div className="board-row">
+        {renderSquare(3)}
+        {renderSquare(4)}
+        {renderSquare(5)}
+      </div>
+      <div className="board-row">
+        {renderSquare(6)}
+        {renderSquare(7)}
+        {renderSquare(8)}
+      </div>
+    </div>
+  );
 }
+
 
 export default Board;
 

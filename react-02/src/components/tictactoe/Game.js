@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Game.css';
 import Board from './Board';
 
+
 class Game extends Component {
   constructor() {
     super();
@@ -42,7 +43,6 @@ class Game extends Component {
     }
   }
 
-
   handleClick = async (i) => {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
@@ -73,7 +73,6 @@ class Game extends Component {
     }
   }
 
-
   jumpTo = (step) => {
     this.setState({
       stepNumber: step,
@@ -81,12 +80,10 @@ class Game extends Component {
     })
   }
 
-  
   computerMove(squares) {
     const pick = this.evaluateSquares(squares);
     this.handleClick(pick);
   }
-
 
   evaluateSquares(squares) {
     const lines = [
@@ -159,7 +156,6 @@ class Game extends Component {
     return index;
   }
 
-
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
@@ -219,6 +215,7 @@ class Game extends Component {
 }
 
 export default Game;
+
 
 function calculateWinner(squares) {
   const lines = [

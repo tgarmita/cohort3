@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 class Icon extends Component {
   render() {
     return (
-      <img name={this.props.name} src={this.props.image} className="icon" style ={this.props.style} onClick={this.props.onClick} alt="iconName" />
+      <img name={this.props.name} src={this.props.image} className="icon" style={this.props.style} onClick={this.props.onClick} alt="iconName" />
     )
   }
 }

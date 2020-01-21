@@ -5,6 +5,7 @@ import CityPoint from './CityPoint.js';
 import CityTools from './CityTools.js';
 import { Community } from './cities.js';
 import serverFunctions from './serverFunctions.js'
+import { AppContext } from '../../context';
 
 class CitiesApp extends Component {
   constructor() {
@@ -136,43 +137,47 @@ class CitiesApp extends Component {
 
   render() {
     return (
-      <div id="idGridContainer">
-        <div id="idSummaryPanel">
-          <h2 className="subheading">Community Manager</h2>
+      <AppContext.Consumer>
+        {value => (
+          <div id="idMainContainer">
+            <div id="idManagerPanel" style={{ backgroundColor: value.foreground }}>
+              <h2 className="managerHeading">Community Manager</h2>
 
-          <CreateCityForm onSubmit={this.addCity} message={this.state.formMessage} /><br />
+              <CreateCityForm onSubmit={this.addCity} message={this.state.formMessage} /><br />
 
-          <div id="idCityReport" className="hidden">
-            <h3>Report</h3>
-            <span>Total Population: </span><span>{this.state.totalPopulation}</span><br />
-            <span>Most Northern: </span><span>{this.state.mostNorthern}</span><br />
-            <span>Most Southern: </span><span>{this.state.mostSouthern}</span><br />
-          </div>
-        </div>
+              <div id="idCityReport" className="hidden">
+                <h3>Report</h3>
+                <span>Total Population: </span><span>{this.state.totalPopulation}</span><br />
+                <span>Most Northern: </span><span>{this.state.mostNorthern}</span><br />
+                <span>Most Southern: </span><span>{this.state.mostSouthern}</span><br />
+              </div>
+            </div>
 
-        <div id="idMapPanel">
-          <h2 className="subheading2">Alberta Map</h2>
+            <div id="idMapPanel">
+              <h2 className="mapHeading">Alberta Map</h2>
 
-          <div>
-            <h3>City Tools</h3>
-            <h4 id="idSelectedCity">{this.state.selectedCity.name || "Select City"}</h4>
+              <div>
+                <h3>City Tools</h3>
+                <h4 id="idSelectedCity">{this.state.selectedCity.name || "Select City"}</h4>
 
-            {this.renderTools()}
+                {this.renderTools()}
 
-          </div>
+              </div>
 
-          <div>
-            <span id="idFetchError">{this.state.fetchMessage}</span>
+              <div>
+                <span id="idFetchError">{this.state.fetchMessage}</span>
 
-            <div className="map bgimg">
-              <svg id="idSVG" width="330" height="550">
-                {this.renderPoints()}
-              </svg>
+                <div className="map bgimg">
+                  <svg id="idSVG" width="330" height="550">
+                    {this.renderPoints()}
+                  </svg>
+                </div>
+              </div>
+
             </div>
           </div>
-
-        </div>
-      </div>
+        )}
+      </AppContext.Consumer>
     );
   }
 }

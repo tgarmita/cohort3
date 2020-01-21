@@ -10,7 +10,6 @@ const LinkedListApp = () => {
   const [amount, setAmount] = useState(1);
   const [total, setTotal] = useState();
 
-
   const handleInsert = () => {
     list.insert(food, amount);
     setPosition(list.position);
@@ -47,17 +46,19 @@ const LinkedListApp = () => {
   const renderNodes = () => {
     const listDisplay = [];
     let node = list.head;
+    let counter = 0;
 
     while (list.head && node) {
+      counter = counter + 1;
       listDisplay.push(
-        <p key={node.subject + node.amount} >{node.amount} {node.subject} {position === node ? " <" : ""}</p>)
+        <p className="node" key={counter} >{node.amount} {node.subject} {position === node ? " <" : ""}</p>)
       node = node.forwardNode;
     }
     return listDisplay;
   }
 
   return (
-    <div>
+    <div className="buttons-ui">
       <label>Select Food:
         <select value={food} onChange={event => setFood(event.target.value)}>
           <option value="🥥">Coconut</option>
