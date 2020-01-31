@@ -6,6 +6,9 @@ import Starter from './components/starter/Starter';
 import Game from './components/tictactoe/Game';
 import AccountsApp from './components/accounts/AccountsApp';
 import CitiesApp from './components/cities/CitiesApp';
+import LinkedListApp from './components/linked-list/LinkedListApp';
+import FifoLifoApp from './components/fifo-lifo/FifoLifoApp';
+import Settings from './components/settings/Settings';
 
 
 it('renders without crashing', () => {
@@ -43,6 +46,26 @@ it('CitiesApp renders without crashing', () => {
   ReactDOM.render(<CitiesApp />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
+
+it('LinkedListApp renders without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<LinkedListApp />, div);
+  ReactDOM.unmountComponentAtNode(div);
+});
+
+it('FifoLifoApp renders without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<FifoLifoApp />, div);
+  ReactDOM.unmountComponentAtNode(div);
+});
+
+it('Settings renders without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<Settings />, div);
+  ReactDOM.unmountComponentAtNode(div);
+});
+
+
 
 
 
