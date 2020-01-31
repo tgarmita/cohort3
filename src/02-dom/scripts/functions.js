@@ -15,13 +15,17 @@ export const createListElement = () => {
     idList.appendChild(li);
 };
 
+let counter = 1;
+
 export const appendCardElement = () => {
     let newCard = document.createElement("DIV");
-    newCard.textContent = "Card " + idLeftPanel.childElementCount; //faster than createTextNode
+    newCard.textContent = "Card " + counter; //faster than createTextNode
     idLeftPanel.appendChild(newCard); //Where the placement occurs
     newCard.className = "card";
 
     addCardButtons(newCard);
+
+    counter = counter + 1;
 };
 
 export const addCardButtons = (newCard) => {
